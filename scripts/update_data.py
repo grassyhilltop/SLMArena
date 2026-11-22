@@ -653,9 +653,19 @@ def main():
             continue
         hit = next((m for m in sorted(slms, key=lambda m: m["date"]) if m["eci"] >= th["value"]), None)
         if hit:
-            note("crossed", f"{th['key']}:{th.get('ref_model')}",
-                 {"type": "threshold", "title": f"Threshold crossed: a single-GPU model reached {'' if th['key'] == 'frontier' else 'the '}{th['short']} ({th['value']:.1f} ECI)",
-                  "detail": f"{hit['name']} scores {hit['eci']:.1f} on the ECI, at or above {th.get('ref_model', '')}."})
+            if th["key"] == "selfrep":
+                # The ECI is only a proxy: say so in the alert itself, not just on the page.
+                ev = {"type": "threshold",
+                      "title": f"A single-GPU model reached Anthropic's self-replication floor on the ECI ({th['value']:.1f})",
+                      "detail": f"{hit['name']} scores {hit['eci']:.1f} on the ECI, at or above {th.get('ref_model', '')}, the only "
+                                f"open-weight model that completed end-to-end replication in Anthropic's simplified evaluation. "
+                                f"The ECI is a general capability index and only a rough proxy for replication ability; "
+                                f"this does not show that {hit['name']} can self-replicate."}
+            else:
+                ev = {"type": "threshold",
+                      "title": f"Threshold crossed: a single-GPU model reached {'' if th['key'] == 'frontier' else 'the '}{th['short']} ({th['value']:.1f} ECI)",
+                      "detail": f"{hit['name']} scores {hit['eci']:.1f} on the ECI, at or above {th.get('ref_model', '')}."}
+            note("crossed", f"{th['key']}:{th.get('ref_model')}", ev)
     write_json(state_path, ast)
     out["events"] = events
 

@@ -11,23 +11,24 @@ By Joel Sadler, University of Virginia, School of Data Science. The earlier name
   [Epoch Capabilities Index](https://epoch.ai/eci) (ECI). Each row has the ECI interval, Rank (UB), parameters,
   4-bit weight size, the smallest GPU it fits, and a link to its Hugging Face model card. Filters for GPU memory,
   release date, region and active parameters; CSV download of the filtered table.
-* **Fig. 1, the forecast chart**, building on Figure 4 of Anthropic's
+* **Fig. 1, the forecast chart**, building on the ECI chart in section B (“Going viral”) of Anthropic's
   [“AI models may be capable of self-replicating without access to a datacenter”](https://www.anthropic.com/research/self-replicating-ai)
   (William Zhou and Daniel Freeman, 12 October 2026): a least-squares trend through the best-at-release models, a 90%
   prediction band, and where the trend meets one of three bars, each tied to a plain question:
-  * **Can SLMs self-replicate?** Anthropic's self-replication floor (GLM-5.2's current ECI).
+  * **Have SLMs reached the self-replication floor?** Anthropic's floor (GLM-5.2's current ECI), a rough proxy only:
+    the ECI is a general capability index, not a replication test.
   * **When do SLMs match today's best model?** Time to today's state of the art (best ECI of any model today).
-  * **How good is today's best SLM?** Frontier lag: which past frontier it matches, and which much larger open models
-    it outscores.
+  * **How good is today's best SLM?** Frontier lag: how long ago the best model of any size first reached its score,
+    and which much larger open models it outscores.
 * **Controls**: models from all labs, US, China or the rest of the world, and by active parameters (dense, mixture of
-  experts, ≤ 4B active), each refitting the trend; switches for the state of the art and for estimates; From/To time
-  controls (full history to the last six months); colour by region or lab; a wide-chart mode; beige, white or dark
+  experts, mixture of experts with ≤ 4B active), each refitting the trend; switches for the state of the art and for estimates; From/To time
+  controls (from July 2023 down to the last six months); colour by region or lab; a wide-chart mode; beige, white or dark
   themes. Hover any point or date for details; download the chart data as CSV.
 * **Findings**: the headline events (measured, on trend, projected), and what changed since Anthropic's post.
 * **Contenders**: new single-GPU models Epoch has not scored yet, with estimates from their developers' benchmark
-  claims (Fig. 5) where possible, anchored to a model with a known ECI in the same table and converted with Epoch's
+  claims (Fig. 2) where possible, anchored to a model with a known ECI in the same table and converted with Epoch's
   benchmark slope. Estimates are never used for ranks, fits, thresholds or alerts.
-* **Frontier gap** (Figs. 2–3) and a **second opinion** from the Artificial Analysis Intelligence Index (Fig. 4).
+* **Frontier gap** (Figs. 3–4) and a **second opinion** from the Artificial Analysis Intelligence Index (Fig. 5).
 
 ## Definition of a single-GPU model (SLM)
 
@@ -61,9 +62,8 @@ python3 scripts/update_data.py && python3 scripts/build_page.py
 
 * **GitHub**: every alert is published as a release. Anyone can follow with *Watch → Custom → Releases*, or the feed
   at `/releases.atom`. Works now, no setup.
-* **Email (Buttondown, list `tinylm`)**: the sign-up form posts to Buttondown. Alert emails are sent by whichever
-  repository has the secret `BUTTONDOWN_API_KEY` (Settings → Secrets and variables → Actions); add it to one of the
-  two mirrors only, or subscribers get each alert twice. Use **Actions → Daily update → Run workflow →
+* **Email (Buttondown, list `tinylm`)**: the sign-up form posts to Buttondown. Alert emails are sent by the daily
+  workflow using the repository secret `BUTTONDOWN_API_KEY` (Settings → Secrets and variables → Actions). Use **Actions → Daily update → Run workflow →
   Test alert** to check: it creates a pre-release here and a draft (not a send) in Buttondown.
 
 ## Curating models

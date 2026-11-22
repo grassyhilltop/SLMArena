@@ -168,7 +168,7 @@ select.sel:hover { border-color: var(--ink-3); }
 .qtabs button:hover { color: var(--ink); }
 .qtabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }
 .qtabs .spacer { flex: 1 1 auto; }
-.qtabs .tbtn { align-self: center; margin-left: 6px; padding: 5px 9px; font-size: 12px; }
+#btn-wide { align-self: center; margin-left: 6px; padding: 5px 9px; font-size: 12px; }
 .toolbar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-bottom: 6px; }
 .toolbar .grp { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; }
 .toolbar .spacer { flex: 1 1 auto; }
@@ -190,6 +190,7 @@ details.more[open] > summary { color: var(--ink); border-color: var(--ink-3); }
 .lk-est { width: 9px; height: 9px; border: 2px solid var(--slm); background: var(--surface); transform: rotate(45deg); margin: 0 2px; }
 .lk-now { width: 0; height: 12px; border-left: 2px solid var(--now); }
 .lk-x { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
+.lk-arrow { font-style: normal; font-size: 15px; line-height: 1; color: var(--ink); }
 .chart { position: relative; width: 100%; }
 .chart svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
 .chart text { fill: var(--ink-2); font-family: var(--sans); }
@@ -321,6 +322,8 @@ footer .credits { display: grid; grid-template-columns: repeat(auto-fit, minmax(
 footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; font-weight: 500; }
 
 @media (max-width: 980px) {
+  #btn-wide { display: none; }
+  .dash.wide .side { display: grid; }
   .dash { grid-template-columns: minmax(0, 1fr); }
   .side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; }
   .changed { grid-template-columns: minmax(0, 1fr); }
@@ -337,7 +340,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
   .bar-row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
   .colorby { align-items: flex-start; max-width: none; }
   .colorby .cb-items { justify-content: flex-start; }
-  .qtabs .tbtn.wide-btn { display: none; }
+  .qtabs { flex-wrap: wrap; overflow-x: visible; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .seg button, .btn, .tbtn, select.sel { transition: background-color .15s, border-color .15s, color .15s; }
@@ -348,7 +351,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
   <div class="wrap mast-row">
     <div class="brand">
       <div class="brand-line"><h1>__SITE_NAME__</h1><span class="tag">Single-GPU language model leaderboard</span><span class="byline">By <strong>Joel Sadler</strong>, University of Virginia, School of Data Science</span></div>
-      <p class="tldr">The most capable open models that run on one 32&nbsp;GB GPU, ranked by a verified third-party score: the <a href="https://epoch.ai/eci" target="_blank" rel="noopener">Epoch Capabilities Index (ECI)</a>. <span class="byline" id="updated"></span></p>
+      <p class="tldr">The most capable open models that run on one 32&nbsp;GB GPU, ranked by an independent third-party score: the <a href="https://epoch.ai/eci" target="_blank" rel="noopener">Epoch Capabilities Index (ECI)</a>. <span class="byline" id="updated"></span></p>
     </div>
     <div class="mast-tools ctl"><span id="lbl-skin">Theme</span><div class="seg small" id="ctl-skin" role="group" aria-labelledby="lbl-skin"></div></div>
   </div>
@@ -450,10 +453,10 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
         <p class="soft">These single-GPU models are out but have no ECI yet, so they are not ranked. Where their developers published benchmark scores that the ECI uses, we estimate where those claims would put them. Each one joins the leaderboard once Epoch publishes its score; models Epoch lists without a size are added by hand.</p>
       </div>
       <figure class="card chart-card" style="margin:0 0 16px" id="est-fig">
-        <div class="chart-head"><h3 class="chart-title"><span class="fig">Fig. 5</span>Estimated capability score (ECI) of unscored SLMs, from their developers' benchmark claims</h3></div>
+        <div class="chart-head"><h3 class="chart-title"><span class="fig">Fig. 2</span>Estimated capability score (ECI) of unscored SLMs, from their developers' benchmark claims</h3></div>
         <div class="chart" id="est-chart"></div>
         <div class="legend" id="est-legend"></div>
-        <figcaption class="chart-foot"><span><span class="fig">Fig. 5.</span> Estimates, not Epoch scores. Hover a model for the claims behind it. Method below.</span></figcaption>
+        <figcaption class="chart-foot"><span><span class="fig">Fig. 2.</span> Estimates, not Epoch scores. Hover a model for the claims behind it. Method below.</span></figcaption>
       </figure>
       <div class="tbl-wrap" style="margin-bottom:22px"><table class="lb" style="min-width:760px" id="est-table"></table></div>
       <h3 style="font-size:20px;margin:0 0 12px" id="watchlist">All unscored single-GPU models we track</h3>
@@ -484,13 +487,13 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
           <div class="chart-head"><h2 class="chart-title" id="gapA-title">Best ECI to date: any model vs. single-GPU models</h2></div>
           <div class="legend" id="gapA-legend"></div>
           <div class="chart" id="gapA"></div>
-          <figcaption class="chart-foot"><span><span class="fig">Fig. 2.</span> Frontier = best ECI of any model released by that date, open or closed.</span></figcaption>
+          <figcaption class="chart-foot"><span><span class="fig">Fig. 3.</span> Frontier = best ECI of any model released by that date, open or closed.</span></figcaption>
         </figure>
         <figure class="card chart-card" style="margin:0">
           <div class="chart-head"><h2 class="chart-title" id="gapB-title">Months behind the frontier at each new record</h2></div>
           <div class="legend" id="gapB-legend"></div>
           <div class="chart" id="gapB"></div>
-          <figcaption class="chart-foot"><span><span class="fig">Fig. 3.</span> Lag = release date minus the date any model first reached the same ECI. The open dot uses today's date instead, for the best model today.</span></figcaption>
+          <figcaption class="chart-foot"><span><span class="fig">Fig. 4.</span> Lag = release date minus the date any model first reached the same ECI. The open dot uses today's date instead, for the best model today.</span></figcaption>
         </figure>
       </div>
     </section>
@@ -501,7 +504,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
         <h2>Artificial Analysis Intelligence Index</h2>
         <p class="soft" id="aa-lede"></p>
       </div>
-      <div class="card aa-wrap"><div class="chart-head"><h3 class="chart-title"><span class="fig">Fig. 4</span>Intelligence Index of small open models vs. the best model of any size</h3></div><div class="legend" id="aa-legend" style="margin:0 0 14px"></div><div class="bars" id="aa-bars"></div><div class="chart-foot" style="margin-top:14px" id="aa-foot"></div></div>
+      <div class="card aa-wrap"><div class="chart-head"><h3 class="chart-title"><span class="fig">Fig. 5</span>Intelligence Index of small open models vs. the best model of any size</h3></div><div class="legend" id="aa-legend" style="margin:0 0 14px"></div><div class="bars" id="aa-bars"></div><div class="chart-foot" style="margin-top:14px" id="aa-foot"></div></div>
     </section>
 
     <section class="block" id="why-eci">
@@ -512,7 +515,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
       <div class="cols2">
         <div class="prose">
           <p>The <a href="https://epoch.ai/eci" target="_blank" rel="noopener"><strong>Epoch Capabilities Index</strong></a>, built by Epoch AI, combines results from more than 50 benchmarks into a single scale of general capability. It stitches benchmarks together wherever models were tested on more than one, which sets each benchmark's difficulty. A model scores higher when it does better on harder benchmarks. Because old and new benchmarks are linked, a 2023 model and a 2026 model sit on the same scale even after individual benchmarks saturate. The <a href="https://epoch.ai/data/eci-documentation" target="_blank" rel="noopener">methodology</a> is public, and each score comes with a credible interval, except the two models that anchor the scale (Claude 3.5 Sonnet = 130, GPT-5 = 150).</p>
-          <p>That makes it a good yardstick for a long-run trend. A single benchmark can be saturated, leaked into training data or tuned for. A composite of many benchmarks dilutes any one benchmark's quirks, and Epoch runs many evaluations itself rather than relying on developers' own reports. It does not remove tuning: Epoch notes that developers can still optimize for the benchmarks it uses, and that open-weight models may do so more aggressively, so the gap to the frontier shown here may be understated.</p>
+          <p>That makes it a good yardstick for a long-run trend. A single benchmark can be saturated, leaked into training data or tuned for. A composite of many benchmarks dilutes any one benchmark's quirks, and Epoch runs many evaluations itself, though for many older and smaller models it relies on results published in technical reports, often the developer's own. It does not remove tuning: Epoch notes that developers can still optimize for the benchmarks it uses, and that open-weight models may do so more aggressively, so the gap to the frontier shown here may be understated.</p>
           <p>It is also the index forecasters already use. Anthropic's Frontier Red Team, in <a href="https://www.anthropic.com/research/self-replicating-ai" target="_blank" rel="noopener">“AI models may be capable of self-replicating without access to a datacenter”</a> by <strong>William Zhou</strong> and <strong>Daniel Freeman</strong> (12 October 2026), plotted notable open-weight models of 30B total parameters or fewer on the ECI. In their simplified evaluation GLM-5.2 completed end-to-end replication, so they took it as a rough capability floor and projected when small models reach it, noting that the ECI is only a proxy for replication ability. The hero chart on this page extends their figure and updates it every day.</p>
         </div>
         <div class="prose">
@@ -542,7 +545,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
           <p><strong>Crossing dates.</strong> The projected date is where the line meets the threshold; the range is where the edges of the band meet it. “Crossed” means an actual model scored at or above the threshold.</p>
           <p><strong>Regions.</strong> “Models from” uses the country of the developer's organization, from Epoch's data or our own mapping in config/models.csv where Epoch has none. A lab listed in the US (alone or with partners outside China) counts as US, and likewise for China; everything else, including joint US–China work and labs with no country listed, is the rest of the world. It filters the top 3, the chart, the key numbers, the tables and the gap analysis; the trend is refitted to the best model at each date within the group.</p>
           <p><strong>State of the art.</strong> The “State of the art” button above the chart adds the best ECI of any model to date, open or closed, with its own trend. Today that is <span id="sota-name"></span>.</p>
-          <p><strong>Thresholds.</strong> <em>Self-replication floor</em>: GLM-5.2's current ECI. <em>Frontier one year ago</em>: the best ECI of any model released by this date last year. <em>Today's frontier</em>: the best ECI of any model today.</p>
+          <p><strong>Thresholds.</strong> <em>Self-replication floor</em>: GLM-5.2's current ECI. <em>Today's SOTA</em>: the best ECI of any model today (state of the art). <em>SOTA one year ago</em>: the best ECI of any model released by this date last year.</p>
           <p><strong>Data and updates.</strong> A GitHub Action pulls Epoch's <a href="https://epoch.ai/data/eci_scores.csv" target="_blank" rel="noopener">ECI scores</a> and model metadata every day. Parameter counts come from Epoch, then Hugging Face. The code, data (<a id="dl-json" href="#">JSON</a>, <a id="dl-csv" href="#">CSV</a>, <a id="dl-hist" href="#">daily history</a>) and curated mappings are on <a id="repo-link" href="#">GitHub</a>.</p>
         </div>
       </div>
@@ -641,9 +644,9 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
   }
   // A download control: a real file save on the live site; inside the claude.ai snapshot, a link to the live data.
-  function dlControl(label, name, rowsFn) {
+  function dlControl(label, name, rowsFn, liveHref, liveLabel) {
     if (isPages) return h("button", { type: "button", cls: "dl", onclick: function () { downloadCSV(name, rowsFn()); } }, label);
-    return h("a", { cls: "dl", href: (SITE.site_url || "") + "data/slm_leaderboard.csv", target: "_blank", rel: "noopener" }, label + " (live site)");
+    return h("a", { cls: "dl", href: liveHref || ((SITE.site_url || "") + "data/slm_leaderboard.csv"), target: "_blank", rel: "noopener" }, liveLabel || (label + " (live site)"));
   }
 
   // ---------- statistics (the same method as scripts/update_data.py, which drives the alerts)
@@ -682,12 +685,12 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
   // ---------- state
   var REGIONS = [["all", "All labs"], ["US", "US"], ["China", "China"], ["Other", "Rest of world"]];
   var REGION_NOUN = { all: "", US: "from US labs", China: "from Chinese labs", Other: "from labs outside the US and China" };
-  var ACTIVE = [["all", "All"], ["dense", "Dense only"], ["moe", "Mixture of experts"], ["le4", "≤ 4B active"]];
-  var ACTIVE_NOUN = { all: "", dense: "dense", moe: "mixture-of-experts", le4: "≤ 4B-active" };
+  var ACTIVE = [["all", "All"], ["dense", "Dense only"], ["moe", "Mixture of experts"], ["le4", "MoE, ≤ 4B active"]];
+  var ACTIVE_NOUN = { all: "", dense: "dense", moe: "mixture-of-experts", le4: "≤ 4B-active mixture-of-experts" };
   var FROMS = [["2023-07-01", "Jul 2023"], ["2025-01-01", "Jan 2025"], ["2026-01-01", "Jan 2026"], ["m6", "−6 months"]];
   var TOS = [["auto", "Auto"], ["m3", "+3 months"], ["2027", "2027"], ["2028", "2028"], ["2030", "2030"]];
   var Q = {
-    selfrep: { tab: "Self-replication", q: "Can SLMs self-replicate?" },
+    selfrep: { tab: "Self-replication", q: "Have SLMs reached the self-replication floor?" },
     frontier: { tab: "Time to today's SOTA", q: "When do SLMs match today's best model?" },
     frontier1y: { tab: "Frontier lag", q: "How good is today's best SLM?" }
   };
@@ -717,7 +720,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
 
   function activeOf(m) { return m.active_b || m.params_b || 99; }
   function passesActive(m) {
-    return state.active === "all" || (state.active === "dense" && !m.active_b) || (state.active === "moe" && !!m.active_b) || (state.active === "le4" && activeOf(m) <= 4);
+    return state.active === "all" || (state.active === "dense" && !m.active_b) || (state.active === "moe" && !!m.active_b) || (state.active === "le4" && !!m.active_b && m.active_b <= 4);
   }
   function inRegion(m) { return state.region === "all" || m.region === state.region; }
   function inScope(m) { return inRegion(m) && passesActive(m); }
@@ -764,32 +767,42 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
   function inError(best, t) { return best && best.hi != null && best.hi >= t.value; }
 
   // ---------- plain-language answers to the three questions
+  // Fewer than five best-at-release models: the band is too wide for a date to mean anything.
+  function fewPts() { return !!(MODEL.F && MODEL.F.points < 5); }
+  function fewAns(s, nm) { return { ans: "Too few models to project", why: "Only " + MODEL.F.points + " best-at-release " + nm + " since " + fMon(MODEL.F.start) + ", too few for a reliable date. Best: " + s.best.name + " (" + f1(s.best.eci) + "), " + f1(s.gap) + " below " + s.t.ref_model + "." }; }
+  // Epoch names some models with their date, e.g. "GPT-4 (Mar 2023)"; do not repeat it.
+  function hasMon(name) { return /\(\w{3} \d{4}\)$/.test(name || ""); }
+  function fromMon(name, date) { return hasMon(name) ? "" : " from " + fMon(date); }
   function answer(key) {
     var s = status(key); if (!s || !s.best) return null;
     var b = s.best, t = s.t, nm = scopeNoun();
     if (key === "selfrep") {
-      if (s.kind === "crossed") return { ans: "Yes: crossed " + fMon(s.crossed.date), why: s.crossed.name + " scored " + f1(s.crossed.eci) + ", at or above " + t.ref_model + " (" + f1(t.value) + "), the weakest model that replicated end to end in Anthropic's tests." };
-      if (s.kind === "due") return { ans: "At the floor on trend, since " + fMon(s.trend.date), why: "No released model yet: the best, " + b.name + ", is " + f1(s.gap) + " below " + t.ref_model + " (" + f1(t.value) + ")" + (inError(b, t) ? ", inside the error bars." : ".") };
-      if (s.kind === "ahead") return { ans: "On trend in " + fMon(s.trend.date), why: "About " + Math.max(1, Math.round(monthsBetween(D.today, s.trend.date))) + " months away. Best: " + b.name + " (" + f1(b.eci) + "), " + f1(s.gap) + " below " + t.ref_model + "." };
+      if (s.kind === "crossed") return { ans: "Yes, on the ECI: " + fMon(s.crossed.date), why: s.crossed.name + " scored " + f1(s.crossed.eci) + ", at or above " + t.ref_model + " (" + f1(t.value) + "), the only open-weight model that replicated end to end in Anthropic's simplified tests. The ECI is a rough proxy: this does not show that " + s.crossed.name + " can self-replicate." };
+      if (fewPts()) return fewAns(s, nm);
+      if (s.kind === "due") return { ans: "Not yet · trend passed it " + fMon(s.trend.date), why: "No released model yet: the best, " + b.name + ", is " + f1(s.gap) + " below " + t.ref_model + " (" + f1(t.value) + ")" + (inError(b, t) ? ", inside the error bars." : ".") };
+      if (s.kind === "ahead") { var mo1 = Math.max(1, Math.round(monthsBetween(D.today, s.trend.date))); return { ans: "On trend in " + fMon(s.trend.date), why: "About " + mo1 + (mo1 === 1 ? " month" : " months") + " away (" + rangeText(s.trend) + "). Best: " + b.name + " (" + f1(b.eci) + "), " + f1(s.gap) + " below " + t.ref_model + "." }; }
       return { ans: "No trend yet", why: "Too few best-at-release " + nm + " to project. Best: " + b.name + " (" + f1(b.eci) + ")." };
     }
     if (key === "frontier") {
       if (s.kind === "crossed") return { ans: "Already matched", why: s.crossed.name + " scores " + f1(s.crossed.eci) + ", at or above " + t.ref_model + "." };
       if (!s.trend) return { ans: "No trend yet", why: "Best: " + b.name + " (" + f1(b.eci) + "), " + f1(s.gap) + " below " + t.ref_model + " (" + f1(t.value) + ")." };
+      if (fewPts()) return fewAns(s, nm);
+      if (s.kind === "due") return { ans: "Not yet · trend passed it " + fMon(s.trend.date), why: "No released SLM has matched " + t.ref_model + " (" + f1(t.value) + "), today's best model of any size: the best, " + b.name + ", is " + f1(s.gap) + " below (" + rangeText(s.trend) + ")." };
       var mo = Math.round(monthsBetween(D.today, s.trend.date));
       return { ans: (mo > 0 ? "≈ " + mo + " months · " : "") + fMon(s.trend.date), why: "On trend, " + nm + " reach " + t.ref_model + " (" + f1(t.value) + "), today's best model of any size (" + rangeText(s.trend) + "). The best SLM is " + f1(s.gap) + " below." };
     }
     var L = MODEL.lag, bt = MODEL.beaten[0];
     if (!L) return { ans: "At the frontier", why: b.name + " is the best model of any size." };
     return { ans: "≈ the frontier of " + Math.round(L.months) + " months ago",
-      why: b.name + " (" + sizeLabel(b.params_b) + ", " + f1(b.eci) + ") scores about where the best model was in " + fMon(L.date) + " (" + L.model + ", " + f1(L.eci) + ")." +
-        (bt ? " It outscores " + bt.model + ", a " + sizeLabel(bt.params_b) + "-parameter open model from " + fMon(bt.date) + "." : "") };
+      why: b.name + " (" + sizeLabel(b.params_b) + ", " + f1(b.eci) + "): the best model of any size first reached that score in " + fMon(L.date) + ", with " + L.model + " (" + f1(L.eci) + ")." +
+        (bt ? " It outscores " + bt.model + ", a " + sizeLabel(bt.params_b) + "-parameter open model" + fromMon(bt.model, bt.date) + "." : "") };
   }
   function headline(key) {
-    var s = status(key); if (!s || !s.best) return "";
+    var s = status(key); if (!s || !s.best) return "No " + scopeNoun() + " have an ECI score yet. Try another filter.";
     var b = s.best, t = s.t, nm = scopeNoun(), F = MODEL.F;
     if (key === "selfrep") {
       if (s.kind === "crossed") return "A released SLM has crossed Anthropic's self-replication floor (" + t.ref_model + ", " + f1(t.value) + "): " + s.crossed.name + " scores " + f1(s.crossed.eci) + ".";
+      if (fewPts()) return "Only " + F.points + " best-at-release " + nm + " since " + fMon(F.start) + ": too few to project a date. The best, " + b.name + ", is " + f1(s.gap) + " below " + t.ref_model + " (" + f1(t.value) + ").";
       if (s.kind === "due") return "The trend line for " + nm + " crossed Anthropic's self-replication floor (" + t.ref_model + ", " + f1(t.value) + ") in " + fMon(s.trend.date) + " (" + rangeText(s.trend) + "). No released SLM has crossed yet: the best, " + b.name + ", is " + f1(s.gap) + " below" + (inError(b, t) ? ", inside the error bars." : ".");
       if (s.kind === "ahead") return "On trend, " + nm + " reach Anthropic's self-replication floor (" + t.ref_model + ", " + f1(t.value) + ") in " + fMon(s.trend.date) + " (" + rangeText(s.trend) + "). The best today, " + b.name + ", is " + f1(s.gap) + " below.";
       return F ? "The trend is not rising, so no crossing date can be projected." : "Too few best-at-release " + nm + " to fit a trend.";
@@ -797,13 +810,15 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
     if (key === "frontier") {
       if (s.kind === "crossed") return s.crossed.name + " already matches today's best model, " + t.ref_model + " (" + f1(t.value) + ").";
       if (!s.trend) return F ? "The trend is not rising, so no date can be projected." : "Too few best-at-release " + nm + " to fit a trend.";
+      if (fewPts()) return "Only " + F.points + " best-at-release " + nm + " since " + fMon(F.start) + ": too few to project a date. The best, " + b.name + ", is " + f1(s.gap) + " below today's best model, " + t.ref_model + " (" + f1(t.value) + ").";
+      if (s.kind === "due") return "The trend line for " + nm + " passed today's best model, " + t.ref_model + " (" + f1(t.value) + "), in " + fMon(s.trend.date) + " (" + rangeText(s.trend) + "), but no released SLM has matched it: the best, " + b.name + ", is " + f1(s.gap) + " below.";
       var mo = Math.round(monthsBetween(D.today, s.trend.date));
       return "On trend, " + nm + " match today's best model, " + t.ref_model + " (" + f1(t.value) + "), around " + fMon(s.trend.date) + (mo > 0 ? ", about " + mo + " months from now" : "") + " (" + rangeText(s.trend) + ").";
     }
     var L = MODEL.lag, bt = MODEL.beaten[0];
     if (!L) return b.name + " is the best model of any size.";
-    return "Today's best " + scopeOne() + ", " + b.name + " (" + sizeLabel(b.params_b) + " parameters), scores " + f1(b.eci) + ": about where the best model of any size was " + Math.round(L.months) + " months ago (" + L.model + ", " + f1(L.eci) + ", " + fMon(L.date) + ")." +
-      (bt ? " It outscores " + bt.model + ", a " + sizeLabel(bt.params_b) + "-parameter open model from " + fMon(bt.date) + "." : "");
+    return "Today's best " + scopeOne() + ", " + b.name + " (" + sizeLabel(b.params_b) + " parameters), scores " + f1(b.eci) + ": the best model of any size first reached that score " + Math.round(L.months) + " months ago (" + L.model + ", " + f1(L.eci) + (hasMon(L.model) ? "" : ", " + fMon(L.date)) + ")." +
+      (bt ? " It outscores " + bt.model + ", a " + sizeLabel(bt.params_b) + "-parameter open model" + fromMon(bt.model, bt.date) + "." : "");
   }
 
   // ---------- controls
@@ -952,14 +967,14 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
       colored ? "SLMs, coloured by " + (state.colorBy === "region" ? "region" : "lab") + " (large dots: best at release)" : "SLMs: best at release, others" + (state.est ? ", estimates (unscored)" : "")));
     lg.appendChild(legendItem(F ? [h("i", { cls: "lk-line" }), h("i", { cls: "lk-band" })].concat(state.sota ? [h("i", { cls: "lk-line", style: "border-color:var(--sota)" })] : []) : (state.sota ? [h("i", { cls: "lk-line", style: "border-color:var(--sota)" })] : []),
       (F ? "SLM trend and 90% band" : "") + (state.sota ? (F ? "; " : "") + "state of the art, " + MODEL.sota.model : "") + (F || state.sota ? " (dashed: projection)" : "No trend for this group")));
-    lg.appendChild(legendItem([h("i", { cls: "lk-th", style: "border-color:" + thColor(key) }), h("i", { cls: "lk-x" })], t.label + " (" + t.ref_model + ", " + f1(t.value) + ") and where the trend meets it"));
+    var vr = viewRange(), tsL = MODEL.ths[key], cdVis = !!(F && tsL && tsL.trend && !tsL.crossed && pd(tsL.trend.date) >= vr[0] && pd(tsL.trend.date) <= vr[1]);
+    lg.appendChild(legendItem([h("i", { cls: "lk-th", style: "border-color:" + thColor(key) })].concat(cdVis ? [h("i", { cls: "lk-x" })] : []), t.label + " (" + t.ref_model + ", " + f1(t.value) + ")" + (cdVis ? " and where the trend meets it" : "")));
     var lg2 = $("#hero-legend2"); lg2.textContent = "";
     lg2.appendChild(legendItem([h("i", { cls: "lk-now" })], "today"));
-    var tsL = MODEL.ths[key];
-    if (tsL && tsL.trend && !tsL.crossed && tsL.trend.early && tsL.trend.late) lg2.appendChild(legendItem([h("i", { cls: "lk-range" })], "90% range of the crossing date"));
-    if (key === "frontier1y") lg2.appendChild(legendItem([h("i", { style: "width:9px;height:9px;border:1.5px solid var(--ink-3);display:inline-block" })], "large open models the best SLM outscores"));
-    lg2.appendChild(legendItem([], "Hover any point or date for details."));
-    var dl = $("#hero-dl"); dl.textContent = ""; dl.appendChild(dlControl("Download chart data (CSV)", "slmarena-fig1.csv", heroCSV)); dl.appendChild(document.createTextNode(" · "));
+    if (cdVis && tsL.trend.early && tsL.trend.late) lg2.appendChild(legendItem([h("i", { cls: "lk-range" })], "90% range of the crossing date"));
+    if (key === "frontier1y" && MODEL.lag) lg2.appendChild(legendItem([h("i", { cls: "lk-arrow" }, "⟷")], Math.round(MODEL.lag.months) + " months from the frontier to one GPU"));
+    if (key === "frontier1y" && MODEL.beaten.length) lg2.appendChild(legendItem([h("i", { style: "width:9px;height:9px;border:1.5px solid var(--ink-3);display:inline-block" })], "large open models it outscores"));
+    var dl = $("#hero-dl"); dl.textContent = ""; dl.appendChild(dlControl("Download chart data (CSV)", "slmarena-fig1.csv", heroCSV, (SITE.site_url || "") + "#forecast", "Download chart data on the live site")); dl.appendChild(document.createTextNode(" · "));
     var target = heroTarget();
     if (!animate || REDUCED || !HERO.cur) { cancelAnimationFrame(HERO.raf); HERO.cur = target; drawHero(target, true); return; }
     var from = HERO.cur, t0 = null, dur = 650;
@@ -1094,7 +1109,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
       if (ax1 - ax0 > 20) {
         svg.append("line").attr("x1", ax0 + 7).attr("x2", ax1 - 3).attr("y1", ay).attr("y2", ay).attr("stroke", C.ink).attr("stroke-width", 1.5);
         svg.append("path").attr("d", "M" + (ax1 - 2) + "," + ay + " l-7,-4 l0,8 z").attr("fill", C.ink);
-        svg.append("path").attr("d", "M" + (ax0 + 6) + "," + ay + " l7,-4 l0,8 z").attr("fill", C.ink);
+        if (x(ld) >= M.l) svg.append("path").attr("d", "M" + (ax0 + 6) + "," + ay + " l7,-4 l0,8 z").attr("fill", C.ink);
       }
       MODEL.beaten.filter(function (m) { var d = pd(m.date); return d >= start && d <= end && m.eci >= dom.y0; }).slice(0, 3).forEach(function (m) {
         extras.push({ kind: "big", x: x(pd(m.date)), y: y(m.eci), r: 5, info: m });
@@ -1116,7 +1131,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
       svg.append("line").attr("x1", ex).attr("x2", ex).attr("y1", y(e.lo)).attr("y2", y(e.hi)).attr("stroke", col).attr("stroke-width", 1.5).attr("stroke-dasharray", "2 2").attr("data-grp", colored ? groupOf(e) : "");
       svg.append("rect").attr("x", ex - 5).attr("y", ey - 5).attr("width", 10).attr("height", 10).attr("transform", "rotate(45 " + ex + " " + ey + ")")
         .attr("fill", C.surface).attr("stroke", col).attr("stroke-width", 2).attr("data-grp", colored ? groupOf(e) : "");
-      pts.push({ kind: "est", m: { name: e.name, eci: e.eci, date: e.date }, d: pd(e.date), est: e, x: ex, y: ey, r: 7, rec: false });
+      pts.push({ kind: "est", m: { name: e.name, eci: e.eci, date: e.date }, d: pd(e.date), est: e, x: ex, y: ey, r: 7, rec: false, grp: colored ? groupOf(e) : null });
     });
     // crossing point: a small black dot where the trend meets the bar
     if (cdOn) {
@@ -1128,7 +1143,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
     if (dom.sa > 0.5) steps.forEach(function (p) { if (p.s && p.s !== S) pts.push({ kind: "step", x: x(p.d), y: y(p.v), r: 3, d: p.d, info: p.s }); });
     extras.forEach(function (p) { pts.push(p); });
     var hidden = MODEL.models.filter(function (m) { var d = pd(m.date); return d >= start && d <= end && m.eci < dom.y0; }).length;
-    if (full) $("#hero-fitnote").textContent = (F ? "SLM trend: least-squares fit to the best model at each date, " + f1(F.b) + " ECI per year, R² " + F.r2.toFixed(2) + ", " + F.points + " models since " + fMon(F.start) + "." : "Too few best-at-release models in this group to fit a trend.") + (hidden ? " " + hidden + " weaker models below the axis are in the table." : "");
+    if (full) $("#hero-fitnote").textContent = (F ? "SLM trend: least-squares fit to the best model at each date, " + f1(F.b) + " ECI per year, R² " + F.r2.toFixed(2) + ", " + F.points + " models since " + fMon(F.start) + "." : "Too few best-at-release models in this group to fit a trend.") + " Hover any point or date for details." + (hidden ? " " + hidden + (hidden === 1 ? " weaker model below the axis is" : " weaker models below the axis are") + " in the table." : "");
     if (!full) return;
 
     // ----- labels, placed greedily so nothing overlaps
@@ -1136,7 +1151,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
     if (rangeBox) labels.push(rangeBox);
     function free(bx, overLines) {
       if (bx.x0 < M.l || bx.x1 > W - M.r || bx.y0 < M.t - 2 || bx.y1 > H - M.b) return false;
-      for (var i = 0; i < labels.length; i++) { var o = labels[i]; if (overLines && o.line) continue; if (bx.x0 < o.x1 && bx.x1 > o.x0 && bx.y0 < o.y1 && bx.y1 > o.y0) return false; }
+      for (var i = 0; i < labels.length; i++) { var o = labels[i]; if (overLines && o.line && !o.hard) continue; if (bx.x0 < o.x1 && bx.x1 > o.x0 && bx.y0 < o.y1 && bx.y1 > o.y0) return false; }
       for (var j = 0; j < pts.length; j++) { var q = pts[j]; if (q.x + q.r > bx.x0 && q.x - q.r < bx.x1 && q.y + q.r > bx.y0 && q.y - q.r < bx.y1) return false; }
       return true;
     }
@@ -1144,25 +1159,40 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
       var w = d3.max(lines, function (l) { return textW(l.text, l.font); }), hgt = 15 * (lines.length - 1);
       for (var i = 0; i < cands.length; i++) {
         var c = cands[i], x0 = c[2] === "end" ? c[0] - w : c[2] === "middle" ? c[0] - w / 2 : c[0];
-        var bx = { x0: x0 - 2, x1: x0 + w + 2, y0: c[1] - 12, y1: c[1] + 4 + hgt };
-        if (free(bx, overLines) || (always && i === cands.length - 1)) {
-          labels.push(bx);
-          lines.forEach(function (l, k) { svg.append("text").attr("class", "lbl").attr("x", c[0]).attr("y", c[1] + 15 * k).attr("text-anchor", c[2]).style("font", l.font).style("fill", l.fill).text(l.text); });
-          return true;
-        }
+        var bx = { x0: x0 - 4, x1: x0 + w + 4, y0: c[1] - 12, y1: c[1] + 4 + hgt };
+        if (free(bx, overLines)) { draw(c, bx); return true; }
       }
-      return false;
+      if (!always) return false;
+      // fallback: inside the plot, clear of other labels and hard lines, over the fewest points
+      var bestC = null, bestB = null, bestN = 1e9;
+      cands.forEach(function (c2) {
+        var xa0 = c2[2] === "end" ? c2[0] - w : c2[2] === "middle" ? c2[0] - w / 2 : c2[0];
+        var b2 = { x0: xa0 - 4, x1: xa0 + w + 4, y0: c2[1] - 12, y1: c2[1] + 4 + hgt };
+        if (b2.x0 < M.l || b2.x1 > W - M.r || b2.y0 < M.t - 2 || b2.y1 > H - M.b) return;
+        if (labels.some(function (o) { return (!o.line || o.hard) && b2.x0 < o.x1 && b2.x1 > o.x0 && b2.y0 < o.y1 && b2.y1 > o.y0; })) return;
+        var n = pts.filter(function (q) { return q.x + q.r > b2.x0 && q.x - q.r < b2.x1 && q.y + q.r > b2.y0 && q.y - q.r < b2.y1; }).length;
+        if (n < bestN) { bestN = n; bestC = c2; bestB = b2; }
+      });
+      if (!bestC) return false;
+      draw(bestC, bestB); return true;
+      function draw(c, bx) {
+        labels.push(bx);
+        lines.forEach(function (l, k) { var tx = svg.append("text").attr("class", "lbl").attr("x", c[0]).attr("y", c[1] + 15 * k).attr("text-anchor", c[2]).style("font", l.font).style("fill", l.fill).text(l.text); if (l.grp) tx.attr("data-grp", l.grp); });
+      }
     }
-    function block(xa, ya, xb, yb) {
+    function block(xa, ya, xb, yb, hard) {
       var n = Math.max(1, Math.ceil(Math.hypot(xb - xa, yb - ya) / 5));
-      for (var i = 0; i <= n; i++) { var px = xa + (xb - xa) * i / n, py = ya + (yb - ya) * i / n; labels.push({ x0: px - 2, x1: px + 2, y0: py - 2, y1: py + 2, line: true }); }
+      for (var i = 0; i <= n; i++) { var px = xa + (xb - xa) * i / n, py = ya + (yb - ya) * i / n; labels.push({ x0: px - 2, x1: px + 2, y0: py - 2, y1: py + 2, line: true, hard: !!hard }); }
     }
     var F12 = "600 12px Inter, system-ui, sans-serif", F125 = "500 12.5px Inter, system-ui, sans-serif", F11 = "400 11px Inter, system-ui, sans-serif", F115 = "500 11.5px Inter, system-ui, sans-serif";
     // "Today" sits in the top margin, centred on its line
     if (nowOn) {
       svg.append("text").attr("x", x(today)).attr("y", M.t - 7).attr("text-anchor", "middle").style("font", "600 11px Inter, system-ui, sans-serif").style("fill", C.now).text("Today");
-      labels.push({ x0: x(today) - 2, x1: x(today) + 2, y0: M.t, y1: H - M.b, line: true });
+      labels.push({ x0: x(today) - 2, x1: x(today) + 2, y0: M.t, y1: H - M.b, line: true, hard: true });
     }
+    // the lag arrow is drawn first and kept clear, so no label hides its heads
+    var lagA = false, lx0 = 0, lx1 = 0;
+    if (lagOn) { lx0 = Math.max(x(pd(L.date)), M.l); lx1 = nowOn ? x(today) : W - M.r; if (lx1 - lx0 > 20) { lagA = true; block(lx0, y(best.eci), lx1, y(best.eci), true); } }
     var thText = narrow ? f1(t.value) + " · " + t.ref_model : t.label + ": " + f1(t.value) + " (" + t.ref_model + ")";
     var thC = [[M.l + 8, ty - 8, "start"], [W - M.r - 8, ty - 8, "end"], [W - M.r - 8, ty + 18, "end"], [M.l + 8, ty + 18, "start"]];
     if (!place([{ text: thText, font: F125, fill: C.ink }], thC)) place([{ text: f1(t.value) + " · " + t.ref_model, font: F125, fill: C.ink }], thC, true);
@@ -1175,15 +1205,18 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
     }
     // the best SLM keeps its name; supporting numbers go on a second line
     var bp = best && pts.filter(function (p) { return p.kind === "slm" && p.m === best; })[0];
-    if (bp && !place([{ text: best.name, font: F12, fill: C.ink }], [[bp.x + bp.r + 6, bp.y + 4, "start"], [bp.x - bp.r - 6, bp.y + 4, "end"], [bp.x, bp.y + bp.r + 15, "middle"], [bp.x, bp.y - bp.r - 7, "middle"], [bp.x + bp.r + 4, bp.y + bp.r + 12, "start"]]))
-      place([{ text: best.name, font: F12, fill: C.ink }], [[bp.x + bp.r + 6, bp.y + 4, "start"], [bp.x - bp.r - 6, bp.y + 4, "end"], [bp.x, bp.y + bp.r + 15, "middle"], [bp.x + bp.r + 6, bp.y + 4, "start"]], true, true);
+    if (bp) {
+      var bl = [{ text: best.name, font: F12, fill: C.ink, grp: bp.grp }];
+      if (!place(bl, [[bp.x + bp.r + 6, bp.y + 4, "start"], [bp.x - bp.r - 6, bp.y + 4, "end"], [bp.x, bp.y + bp.r + 15, "middle"], [bp.x, bp.y - bp.r - 7, "middle"], [bp.x + bp.r + 4, bp.y + bp.r + 12, "start"]]))
+        place(bl, [[bp.x + bp.r + 6, bp.y + 4, "start"], [bp.x - bp.r - 6, bp.y + 4, "end"], [bp.x, bp.y - bp.r - 7, "middle"], [bp.x, bp.y + bp.r + 15, "middle"], [bp.x - bp.r - 2, bp.y - bp.r - 5, "end"], [bp.x - bp.r - 2, bp.y + bp.r + 14, "end"],
+          [bp.x, bp.y - bp.r - 22, "middle"], [bp.x, bp.y + bp.r + 30, "middle"], [bp.x - bp.r - 2, bp.y - bp.r - 20, "end"], [bp.x - bp.r - 2, bp.y + bp.r + 29, "end"]], true, true);
+    }
     if (lagOn) {
-      var lx0 = Math.max(x(pd(L.date)), M.l), lx1 = nowOn ? x(today) : W - M.r;
-      if (lx1 - lx0 > 20) {
-        block(lx0, y(best.eci), lx1, y(best.eci));
-        var lmx = (lx0 + lx1) / 2;
-        place([{ text: "≈ " + Math.round(L.months) + " months behind the frontier", font: F12, fill: C.ink }],
-          [[lmx, y(best.eci) + 20, "middle"], [lmx, y(best.eci) - 10, "middle"], [lmx, y(best.eci) + 36, "middle"], [lmx - 40, y(best.eci) + 20, "middle"], [lmx + 40, y(best.eci) + 20, "middle"], [lmx, y(best.eci) + 52, "middle"]], true, true);
+      if (lagA) {
+        var lmx = (lx0 + lx1) / 2, lyy = y(best.eci);
+        place([{ text: "≈ " + Math.round(L.months) + " months", font: F12, fill: C.ink }],
+          [[lmx, lyy + 20, "middle"], [lmx, lyy - 10, "middle"], [lmx, lyy + 36, "middle"], [lmx - 40, lyy + 20, "middle"], [lmx + 40, lyy + 20, "middle"],
+           [lx0 + 8, lyy - 10, "start"], [lx1 - 8, lyy - 10, "end"], [lx0 + 8, lyy + 20, "start"], [lx1 - 8, lyy + 20, "end"]], false, true);
       }
       extras.forEach(function (p) {
         if (p.kind === "front") place([{ text: p.info.name + " · best model, " + fMon(p.info.date), font: F12, fill: C.ink }], [[p.x - 9, p.y - 9, "end"], [p.x + 9, p.y - 9, "start"], [p.x, p.y + 20, "middle"]]);
@@ -1194,10 +1227,10 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
       var gx = nowOn ? x(today) : W - M.r - 4, gm = (y(best.eci) + y(S.eci)) / 2;
       svg.append("line").attr("x1", gx).attr("x2", gx).attr("y1", y(best.eci)).attr("y2", y(S.eci)).attr("stroke", C.sota).attr("stroke-width", 2.5).attr("stroke-opacity", 0.35 * dom.sa);
       labels.push({ x0: gx - 3, x1: gx + 3, y0: y(S.eci), y1: y(best.eci) });
-      place([{ text: "Gap today: " + f1(S.eci - best.eci) + " ECI", font: F12, fill: C.ink }, { text: MODEL.lag ? "≈ " + Math.round(MODEL.lag.months) + " months behind" : "", font: F11, fill: C.ink3 }],
+      place([{ text: "Gap today: " + f1(S.eci - best.eci) + " ECI", font: F12, fill: C.ink }, { text: MODEL.lag ? "best SLM ≈ the frontier of " + Math.round(MODEL.lag.months) + " months ago" : "", font: F11, fill: C.ink3 }],
         [[gx + 8, gm, "start"], [gx - 8, gm, "end"], [gx + 8, y(S.eci) - 22, "start"], [gx + 8, y(best.eci) + 22, "start"], [gx - 8, y(best.eci) + 22, "end"]]);
     }
-    if (sotaOn) place([{ text: "State of the art: " + S.model + " · " + f1(S.eci), font: F12, fill: C.ink }],
+    if (sotaOn && t.ref_model !== S.model) place([{ text: "State of the art: " + S.model + " · " + f1(S.eci), font: F12, fill: C.ink }],
       [[x(sd) - 10, y(S.eci) - 8, "end"], [x(sd) - 10, y(S.eci) + 18, "end"], [x(sd), y(S.eci) - 12, "middle"], [x(sd) + 10, y(S.eci) + 18, "start"]]);
     if (refOn && !narrow) place([{ text: refLabel(t), font: F12, fill: C.ink }],
       [[x(rd) - 10, ty - 9, "end"], [x(rd), ty - 12, "middle"], [x(rd) + 10, ty - 9, "start"], [x(rd) - 10, ty + 18, "end"], [x(rd), ty - 26, "middle"], [x(rd) + 10, ty + 18, "start"], [x(rd), ty + 32, "middle"]]);
@@ -1207,20 +1240,22 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
         [[bx0 - 7, mid, "end"], [bx0 + 7, mid, "start"], [bx0 - 7, ty + 16, "end"], [bx0 + 7, ty + 16, "start"]]);
     }
     if (cdOn) {
-      // the crossing label is centred on its own dashed line, halfway down, so it cannot be read as "Today"
+      // the crossing label sits on or beside its own dashed line and never crosses Today
       var verb = { selfrep: "crosses the floor", frontier: "reaches today's SOTA", frontier1y: "reaches the SOTA of a year ago" }[key] || "crosses";
       var ct = (narrow ? "Trend " : "SLM trend " + verb + " · ") + "~" + fMon(ts.trend.date), cx = x(cd), cy = (ty + H - M.b) / 2;
-      place([{ text: ct, font: F12, fill: C.ink }], [[cx, cy, "middle"], [cx, cy - 28, "middle"], [cx, cy + 28, "middle"], [cx, cy - 56, "middle"], [cx, cy + 56, "middle"]], false, true);
+      var cc = [[cx, cy, "middle"], [cx - 8, cy, "end"], [cx + 8, cy, "start"], [cx, cy - 28, "middle"], [cx - 8, cy - 28, "end"], [cx + 8, cy - 28, "start"],
+        [cx, cy + 28, "middle"], [cx - 8, cy + 28, "end"], [cx + 8, cy + 28, "start"], [cx, cy - 56, "middle"], [cx, cy + 56, "middle"]];
+      if (!place([{ text: ct, font: F12, fill: C.ink }], cc, false, true) && !narrow) place([{ text: "Trend ~" + fMon(ts.trend.date), font: F12, fill: C.ink }], cc, false, true);
     }
     pts.filter(function (p) { return p.kind === "est"; }).sort(function (a, b) { return b.m.eci - a.m.eci; }).forEach(function (p) {
-      place([{ text: p.m.name + " (est.)", font: "italic 500 11.5px Inter, system-ui, sans-serif", fill: C.ink2 }],
+      place([{ text: p.m.name + " (est.)", font: "italic 500 11.5px Inter, system-ui, sans-serif", fill: C.ink2, grp: colored ? groupOf(p.est) : null }],
         [[p.x + 10, p.y + 4, "start"], [p.x - 10, p.y + 4, "end"], [p.x, p.y - 12, "middle"], [p.x, p.y + 20, "middle"], [p.x + 10, p.y - 10, "start"], [p.x + 10, p.y + 18, "start"]], false, true);
     });
     var recs = pts.filter(function (p) { return p.kind === "slm" && p.rec && p.m !== best; }).sort(function (a, b) { return b.d - a.d; });
     var maxLabels = narrow ? 3 : 40, placed = 0;
     recs.forEach(function (p) {
       if (placed >= maxLabels) return;
-      if (place([{ text: p.m.name, font: F115, fill: C.ink }], [[p.x - p.r - 5, p.y + 4, "end"], [p.x, p.y - p.r - 6, "middle"], [p.x + p.r + 5, p.y + 4, "start"], [p.x, p.y + p.r + 15, "middle"],
+      if (place([{ text: p.m.name, font: F115, fill: C.ink, grp: p.grp }], [[p.x - p.r - 5, p.y + 4, "end"], [p.x, p.y - p.r - 6, "middle"], [p.x + p.r + 5, p.y + 4, "start"], [p.x, p.y + p.r + 15, "middle"],
         [p.x + p.r + 2, p.y - p.r - 3, "start"], [p.x - p.r - 2, p.y - p.r - 3, "end"], [p.x + p.r + 2, p.y + p.r + 12, "start"], [p.x - p.r - 2, p.y + p.r + 12, "end"]])) placed++;
     });
 
@@ -1282,7 +1317,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
         tip.appendChild(h("div", null, h("b", null, t.ref_model)));
         tip.appendChild(h("div", { cls: "tv num" }, f1(t.value) + " ECI"));
         tip.appendChild(line(fDate(t.ref_date) + (t.ref_params_b ? " · " + sizeLabel(t.ref_params_b) + " parameters" : "")));
-        tip.appendChild(line(key === "selfrep" ? "Anthropic's self-replication floor: the weakest model that replicated end to end in their tests." : key === "frontier" ? "Today's best model of any size (state of the art)." : "Best model of any size one year ago.", "muted"));
+        tip.appendChild(line(key === "selfrep" ? "Anthropic's self-replication floor: the only open-weight model that replicated end to end in their simplified tests. The ECI is a rough proxy for replication ability." : key === "frontier" ? "Today's best model of any size (state of the art)." : "Best model of any size one year ago.", "muted"));
       } else if (p.kind === "sota" || p.kind === "step" || p.kind === "front") {
         var s = p.info;
         tip.appendChild(h("div", null, h("b", null, s.model || s.name)));
@@ -1316,7 +1351,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
         var bnd = bandAt(F, d);
         cdot.style("display", bnd[1] >= dom.y0 && bnd[1] <= dom.y1 ? null : "none").attr("cx", px).attr("cy", y(bnd[1]));
         tip.appendChild(row(C.slm, f1(bnd[1]), " SLM trend"));
-        tip.appendChild(line(F.points >= 5 ? "90% range " + f1(bnd[0]) + "–" + f1(bnd[2]) : "90% range too wide to show (" + F.points + " best-at-release models)", "num muted"));
+        tip.appendChild(line("90% range " + f1(bnd[0]) + "–" + f1(bnd[2]) + (F.points < 5 ? " (wide: only " + F.points + " best-at-release models)" : ""), "num muted"));
       } else cdot.style("display", "none");
       if (d <= today) {
         var bb = MODEL.models.filter(function (m) { return pd(m.date) <= d; })[0];
@@ -1377,13 +1412,16 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
     var L = lagOf(best), bt = (D.large_open || []).filter(function (m) { return m.eci < best.eci; }).sort(function (a, b) { return b.params_b - a.params_b; })[0];
     var box = $("#finds"); box.textContent = "";
     function card(cls, when, what, data) { box.appendChild(h("div", { cls: "card find " + cls }, h("span", { cls: "when" }, when), h("div", { cls: "what" }, what), h("div", { cls: "data" }, data))); }
-    if (crossedBy) card("status-done", fMon(crossedBy.date) + " · measured", "A released SLM crossed the self-replication floor", crossedBy.name + " scores " + f1(crossedBy.eci) + ", at or above " + floor.ref_model + " (" + f1(floor.value) + ").");
+    if (crossedBy) card("status-done", fMon(crossedBy.date) + " · measured", "A released SLM reached the self-replication floor on the ECI", crossedBy.name + " scores " + f1(crossedBy.eci) + ", at or above " + floor.ref_model + " (" + f1(floor.value) + "). The ECI is a rough proxy for replication ability; this is not a replication test.");
     else if (cr && cr.date <= D.today) card("status-trend", fMon(cr.date) + " · on trend", "The SLM trend crossed Anthropic's self-replication floor",
       "The floor is " + floor.ref_model + "'s score (" + f1(floor.value) + "). All " + variants.length + " trend fits we run put the crossing between " + fMon(variants[0]) + " and " + fMon(variants[variants.length - 1]) + ". No released SLM has crossed yet: " + best.name + " is " + f1(floor.value - best.eci) + " below" + (inError(best, floor) ? ", inside both scores' error bars." : "."));
-    if (L) card("status-done", fMon(best.date) + " · measured", "A " + sizeLabel(best.params_b) + " model reached the frontier of " + Math.round(monthsBetween(L.date, D.today)) + " months ago",
-      best.name + " (" + f1(best.eci) + ") scores about like " + L.model + " (" + f1(L.eci) + "), the best model of any size in " + fMon(L.date) + "." + (bt ? " It also outscores " + bt.model + ", a " + sizeLabel(bt.params_b) + "-parameter open model from " + fMon(bt.date) + ", with about " + Math.round(bt.params_b / best.params_b) + "× fewer parameters." : ""));
-    if (crS) card("status-next", fMon(crS.date) + " · projected", "SLMs reach today's best model, " + sotaT.ref_model,
-      "On trend, a single-GPU model reaches " + f1(sotaT.value) + " in about " + Math.round(monthsBetween(D.today, crS.date)) + " months (" + rangeText(crS) + "). The best SLM is " + f1(sotaT.value - best.eci) + " below today.");
+    if (crS && crS.date > D.today) card("status-next", fMon(crS.date) + " · projected", "SLMs reach today's best model, " + sotaT.ref_model,
+      "On trend, a single-GPU model reaches " + f1(sotaT.value) + " in about " + Math.max(1, Math.round(monthsBetween(D.today, crS.date))) + " months (" + rangeText(crS) + "). The best SLM is " + f1(sotaT.value - best.eci) + " below today.");
+    if (L) {
+      var lagM = Math.round(monthsBetween(L.date, D.today)), lgap = L.eci - best.eci;
+      card("status-done", fMon(D.today) + " · measured", lgap <= 1 ? "A " + sizeLabel(best.params_b) + " model nearly matches the frontier of " + lagM + " months ago" : "A " + sizeLabel(best.params_b) + " model is about " + lagM + " months behind the frontier",
+        best.name + " (" + f1(best.eci) + ") is " + (lgap > 0.05 ? f1(lgap) + " below " : "level with ") + L.model + " (" + f1(L.eci) + (hasMon(L.model) ? "" : ", " + fMon(L.date)) + "), the first model of any size to reach its score." + (bt ? " It already outscores " + bt.model + ", a " + sizeLabel(bt.params_b) + "-parameter open model" + fromMon(bt.model, bt.date) + ", with about " + Math.round(bt.params_b / best.params_b) + "× fewer parameters." : ""));
+    }
     var E = ((D.estimates && D.estimates.models) || []).slice().sort(function (a, b) { return b.eci - a.eci; })[0];
     if (E) card("status-next", "Pending an official score", E.name + (E.eci >= floor.value ? " may already be above the floor" : " is the strongest unscored contender"),
       "Its developer's own benchmark claims put it at about " + f1(E.eci) + " (90% range " + f1(E.lo) + "–" + f1(E.hi) + ")" + (E.eci > best.eci ? ", which would be #1" : "") + ". Estimate, not an Epoch score; see Contenders below.");
@@ -1393,23 +1431,31 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
     if (!A) { ch.hidden = true; return; }
     var glm = floor.value, qb = D.slms.filter(function (m) { return m.name === A.best_model; })[0];
     var Fa = fitOf(all.filter(function (m) { return m.anthropic_class; }), "2023-07-01"), cra = Fa && crossing(Fa, glm);
+    var gp = qb ? glm - qb.eci : null;
+    function mv(d) { return (d >= 0 ? "rose " : "fell ") + f1(Math.abs(d)); }
     var left = h("div", { cls: "prose" },
       h("h3", { style: "font-size:22px;color:var(--ink)" }, "What changed since Anthropic's post"),
       h("p", null, "Anthropic's Frontier Red Team (", h("a", { href: A.url, target: "_blank", rel: "noopener" }, "12 October 2026"), ") put the floor at " + A.floor_model + " = " + f1(A.floor_eci) + " and the best small model at " + A.best_model + " = " + f1(A.best_eci) + ", " + f1(A.gap) + " short, with the trend reaching the floor " + A.projection + "."),
-      h("p", null, "Epoch re-estimates every score as it adds benchmark results, so published numbers move. Since the post, " + A.best_model + " rose " + (qb ? f1(qb.eci - A.best_eci) : "–") + " and " + A.floor_model + " rose " + f1(glm - A.floor_eci) + ". The gap shrank to " + (qb ? f1(glm - qb.eci) : "–") + ", inside both scores' uncertainty, and the trend now meets the floor earlier."),
-      h("p", null, h("strong", null, "In short: "), "on trend, small models have reached Anthropic's self-replication floor; no released small model has yet been measured above it. The ECI is only a rough proxy for replication ability, as Anthropic notes."));
+      h("p", null, "Epoch re-estimates every score as it adds benchmark results, so published numbers move. Since the post, " + A.best_model + " " + (qb ? mv(qb.eci - A.best_eci) : "–") + " and " + A.floor_model + " " + mv(glm - A.floor_eci) + ". " +
+        (gp == null ? "" : gp <= 0 ? A.best_model + " is now at or above the floor" : "The gap " + (gp < A.gap ? "shrank" : "widened") + " to " + f1(gp) + (qb.hi != null && floor.lo != null && qb.hi >= floor.lo ? ", inside both scores' uncertainty" : "")) +
+        (cra && cra.date <= "2026-12-31" ? (gp == null ? "The" : ", and the") + (cra.date <= D.today ? " trend line passed the floor in " : " trend now meets the floor in ") + fMon(cra.date) + "." : (gp == null ? "" : "."))),
+      h("p", null, h("strong", null, "In short: "), crossedBy ? "a released small model, " + crossedBy.name + ", has reached Anthropic's self-replication floor on the ECI. " :
+        (cra && cra.date <= D.today ? "the fitted trend passed Anthropic's self-replication floor in " + fMon(cra.date) + ", but no released small model has been measured at or above it yet. " :
+         cra ? "the fitted trend reaches Anthropic's self-replication floor in " + fMon(cra.date) + "; no released small model has been measured at or above it yet. " :
+         "no released small model has been measured at or above Anthropic's self-replication floor yet. "),
+        "The ECI is only a rough proxy for replication ability, as Anthropic notes."));
     var tbl = h("table", null, h("thead", null, h("tr", null, h("th", { scope: "col" }, ""), h("th", { scope: "col" }, "Anthropic's post"), h("th", { scope: "col" }, "Today"))));
     var tbody = h("tbody");
     [[A.floor_model + " (the floor)", f1(A.floor_eci), f1(glm)],
-     [A.best_model + " (best small model)", f1(A.best_eci), qb ? f1(qb.eci) : "–"],
+     [A.best_model + " (best small model in the post)", f1(A.best_eci), qb ? f1(qb.eci) : "–"],
      ["Gap", f1(A.gap), qb ? f1(glm - qb.eci) : "–"],
-     ["Trend, ≤ 30B class", f1(A.slope) + " ECI/yr", Fa ? f1(Fa.b) + " ECI/yr (since Jul 2023)" : "–"],
+     ["Trend, Anthropic's class (theirs ≤ 30B, ours ≤ " + D.rule.anthropic_max_b + "B)", f1(A.slope) + " ECI/yr", Fa ? f1(Fa.b) + " ECI/yr (since Jul 2023)" : "–"],
      ["Trend reaches the floor", A.projection, cra ? fMon(cra.date) + (cra.date <= D.today ? " (passed)" : "") : "–"]].forEach(function (r) {
       tbody.appendChild(h("tr", null, h("td", null, r[0]), h("td", { cls: "num" }, r[1]), h("td", { cls: "num" }, r[2])));
     });
     tbl.appendChild(tbody);
     ch.appendChild(left);
-    ch.appendChild(h("div", null, tbl, h("p", { cls: "muted", style: "font-size:12px;margin-top:8px" }, "Today = Epoch data as of " + fDate(D.today) + ". The post does not state its fit window; ours uses best-at-release models since July 2023, 30B-class here, ≤ 48B on the chart.")));
+    ch.appendChild(h("div", null, tbl, h("p", { cls: "muted", style: "font-size:12px;margin-top:8px" }, "Today = Epoch data as of " + fDate(D.today) + ". The post does not state its fit window; ours uses best-at-release models since July 2023, ≤ " + D.rule.anthropic_max_b + "B here (Anthropic's ≤ 30B plus Gemma 4 31B), ≤ " + D.rule.max_params_b + "B on the chart.")));
   }
 
   // ---------- full leaderboard
@@ -1533,16 +1579,20 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
         (Math.abs(dS) < 1 ? ", the same pace, so the gap is holding steady rather than closing." : dS > 0 ? ", so they are closing the gap." : ", so the frontier is pulling away."));
     }
     if (lastM && lastM.s != null) parts.push("The gap is about " + Math.round(lastM.frontier - lastM.s) + " ECI points today.");
-    if (recs.length) parts.push("Each new record has arrived " + Math.round(d3.min(recs, function (r) { return r.lag_months; })) + " to " + Math.round(d3.max(recs, function (r) { return r.lag_months; })) + " months after the frontier first reached the same score (average " + Math.round(d3.mean(recs, function (r) { return r.lag_months; })) + ").");
+    if (recs.length) {
+      var lagLo = Math.round(d3.min(recs, function (r) { return r.lag_months; })), lagHi = Math.round(d3.max(recs, function (r) { return r.lag_months; }));
+      parts.push(lagLo === lagHi ? (recs.length === 1 ? "The one new record arrived " : "Each new record arrived ") + lagLo + " months after the frontier first reached the same score."
+        : "Each new record has arrived " + lagLo + " to " + lagHi + " months after the frontier first reached the same score (average " + Math.round(d3.mean(recs, function (r) { return r.lag_months; })) + ").");
+    }
     if (L.now) parts.push("Today the best, " + L.now.name + ", is " + Math.round(L.now.months) + " months behind.");
     $("#gap-lede").textContent = parts.join(" ");
-    $("#gapA-title").textContent = ""; $("#gapA-title").appendChild(h("span", { cls: "fig" }, "Fig. 2")); $("#gapA-title").appendChild(document.createTextNode("Best capability score (ECI) to date: any model vs. " + nm));
-    $("#gapB-title").textContent = ""; $("#gapB-title").appendChild(h("span", { cls: "fig" }, "Fig. 3")); $("#gapB-title").appendChild(document.createTextNode("Months behind the frontier at each new record, " + nm));
+    $("#gapA-title").textContent = ""; $("#gapA-title").appendChild(h("span", { cls: "fig" }, "Fig. 3")); $("#gapA-title").appendChild(document.createTextNode("Best capability score (ECI) to date: any model vs. " + nm));
+    $("#gapB-title").textContent = ""; $("#gapB-title").appendChild(h("span", { cls: "fig" }, "Fig. 4")); $("#gapB-title").appendChild(document.createTextNode("Months behind the frontier at each new record, " + nm));
     var C = { slm: css("--slm"), clay: css("--sota"), ink: css("--ink"), ink2: css("--ink-2"), ink3: css("--ink-3"), surface: css("--surface"), tint: css("--tint-sota") };
     // A: step lines
     var la = $("#gapA-legend"); la.textContent = "";
     la.appendChild(h("span", null, h("i", { cls: "lk-line", style: "border-color:var(--sota)" }), "frontier (any model)"));
-    la.appendChild(h("span", null, h("i", { cls: "lk-line" }), "best " + nm.replace(/models/, "model")));
+    la.appendChild(h("span", null, h("i", { cls: "lk-line" }), "best " + scopeOne()));
     la.appendChild(h("span", null, h("i", { cls: "lk-band", style: "background:var(--tint-sota);box-shadow:inset 0 0 0 1px var(--rule)" }), "gap"));
     var box = $("#gapA"); box.textContent = "";
     var W = Math.max(280, box.clientWidth), H = Math.round(Math.max(260, Math.min(360, W * 0.62))), M = { t: 14, r: 64, b: 28, l: 38 };
@@ -1636,7 +1686,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
         track));
     });
     $("#aa-foot").textContent = "";
-    $("#aa-foot").appendChild(h("span", null, "Source: ", h("a", { href: "https://artificialanalysis.ai/models/open-source/small", target: "_blank", rel: "noopener" }, "Artificial Analysis"), ", highest-scoring setting of each model. Snapshot " + (A.snapshot_date ? fDate(A.snapshot_date) : "") + "."));
+    $("#aa-foot").appendChild(h("span", null, h("span", { cls: "fig" }, "Fig. 5."), " Source: ", h("a", { href: "https://artificialanalysis.ai/models/open-source/small", target: "_blank", rel: "noopener" }, "Artificial Analysis"), ", highest-scoring setting of each model. Snapshot " + (A.snapshot_date ? fDate(A.snapshot_date) : "") + "."));
   }
 
   // ---------- misc text, links, subscribe
@@ -1685,7 +1735,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
   }
 
 
-  // ---------- contenders: Fig. 5 and its table
+  // ---------- contenders: Fig. 2 and its table
   function renderContenders() {
     var EM = ((D.estimates && D.estimates.models) || []).map(function (e) {
       var w = D.watchlist.filter(function (x) { return (x.hf_repo || "").toLowerCase() === e.hf_repo.toLowerCase(); })[0];
@@ -1695,28 +1745,40 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
     if (!EM.length) { $("#est-fig").hidden = true; $("#est-table").closest(".tbl-wrap").hidden = true; return; }
     var floor = th("selfrep"), top = D.slms[0];
     var C = { slm: css("--slm"), green: css("--green"), ink: css("--ink"), ink2: css("--ink-2"), ink3: css("--ink-3"), surface: css("--surface") };
-    var W = Math.max(300, box.clientWidth), narrow = W < 560, rowH = 30, M = { t: 26, r: 18, b: 30, l: narrow ? 120 : 200 };
+    var W = Math.max(300, box.clientWidth), narrow = W < 560, rowH = 30, NF = narrow ? "500 11.5px Inter, system-ui, sans-serif" : "500 12.5px Inter, system-ui, sans-serif";
+    var M = { t: narrow ? 42 : 26, r: 18, b: 30, l: Math.min(Math.round(W * (narrow ? 0.45 : 0.35)), Math.ceil(d3.max(EM, function (e) { return textW(e.name, NF); })) + 16) };
     var H = M.t + M.b + rowH * EM.length;
     var x = d3.scaleLinear().domain([Math.min(d3.min(EM, function (e) { return e.lo; }), top.eci) - 2, Math.max(d3.max(EM, function (e) { return e.hi; }), floor.value) + 2]).nice().range([M.l, W - M.r]);
     var svg = d3.select(box).append("svg").attr("viewBox", "0 0 " + W + " " + H).attr("role", "img").attr("aria-label", "Estimated capability scores of unscored single-GPU models with 90% ranges");
     var xt = x.ticks(narrow ? 4 : 8);
     svg.append("g").selectAll("line").data(xt).join("line").attr("class", "gridline").attr("y1", M.t).attr("y2", H - M.b).attr("x1", function (v) { return Math.round(x(v)) + 0.5; }).attr("x2", function (v) { return Math.round(x(v)) + 0.5; });
     svg.append("g").attr("class", "axis").attr("transform", "translate(0," + (H - M.b) + ")").call(d3.axisBottom(x).tickValues(xt).tickSize(0).tickPadding(9)).call(function (g) { g.select(".domain").remove(); });
-    function vline(v, color, dash, label, anchor) {
+    function vline(v, color, dash, label, anchor, rowN) {
+      var lw = textW(label, "600 11.5px Inter, system-ui, sans-serif");
+      if (anchor === "start" && x(v) + 5 + lw > W) anchor = "end";
+      if (anchor === "end" && x(v) - 5 - lw < 0) anchor = "start";
       svg.append("line").attr("x1", x(v)).attr("x2", x(v)).attr("y1", M.t - 4).attr("y2", H - M.b).attr("stroke", color).attr("stroke-width", 2).attr("stroke-dasharray", dash);
-      svg.append("text").attr("class", "lbl").attr("x", x(v) + (anchor === "end" ? -5 : 5)).attr("y", M.t - 9).attr("text-anchor", anchor).style("font", "600 11.5px Inter, system-ui, sans-serif").style("fill", C.ink).text(label);
+      svg.append("text").attr("class", "lbl").attr("x", x(v) + (anchor === "end" ? -5 : 5)).attr("y", M.t - 9 - (narrow ? 15 * (rowN || 0) : 0)).attr("text-anchor", anchor).style("font", "600 11.5px Inter, system-ui, sans-serif").style("fill", C.ink).text(label);
     }
     var floorRight = x(floor.value) > x(top.eci);
-    vline(floor.value, C.green, null, "Self-replication floor " + f1(floor.value), floorRight ? "start" : "end");
-    vline(top.eci, C.slm, "5 4", "#1 scored: " + top.name + " " + f1(top.eci), floorRight ? "end" : "start");
+    vline(floor.value, C.green, null, "Self-replication floor " + f1(floor.value), floorRight ? "start" : "end", 1);
+    vline(top.eci, C.slm, "5 4", "#1 scored: " + top.name + " " + f1(top.eci), floorRight ? "end" : "start", 0);
+    function fitName(s) { if (textW(s, NF) <= M.l - 12) return s; while (s.length > 3 && textW(s + "…", NF) > M.l - 12) s = s.slice(0, -1); return s + "…"; }
     var tip = h("div", { cls: "tip" }); tip.hidden = true; box.appendChild(tip);
     EM.forEach(function (e, i) {
       var cy = M.t + rowH * i + rowH / 2, gr = svg.append("g").style("cursor", "default");
       gr.append("rect").attr("x", 0).attr("y", cy - rowH / 2).attr("width", W).attr("height", rowH).attr("fill", "transparent");
-      gr.append("text").attr("x", M.l - 10).attr("y", cy + 4).attr("text-anchor", "end").style("font", "500 12.5px Inter, system-ui, sans-serif").style("fill", C.ink).text(e.name);
+      gr.append("text").attr("x", M.l - 10).attr("y", cy + 4).attr("text-anchor", "end").style("font", NF).style("fill", C.ink).text(fitName(e.name));
       gr.append("line").attr("x1", x(e.lo)).attr("x2", x(e.hi)).attr("y1", cy).attr("y2", cy).attr("stroke", C.slm).attr("stroke-width", 2).attr("stroke-dasharray", "3 2");
       gr.append("rect").attr("x", x(e.eci) - 5).attr("y", cy - 5).attr("width", 10).attr("height", 10).attr("transform", "rotate(45 " + x(e.eci) + " " + cy + ")").attr("fill", C.surface).attr("stroke", C.slm).attr("stroke-width", 2);
-      gr.append("text").attr("class", "lbl").attr("x", x(e.hi) + 6).attr("y", cy + 4).style("font", "600 12px Inter, system-ui, sans-serif").style("fill", C.ink).text("≈ " + f1(e.eci));
+      // the value label goes right of the range unless a reference line runs through it; then left, then past the lines
+      var vt = "≈ " + f1(e.eci), vw = textW(vt, "600 12px Inter, system-ui, sans-serif"), vx = x(e.hi) + 6, va = "start";
+      var refX = [x(floor.value), x(top.eci)], hits = function (a, b) { return refX.some(function (r) { return r > a - 4 && r < b + 4; }); };
+      if (hits(vx, vx + vw)) {
+        vx = x(e.lo) - 6; va = "end";
+        if (vx - vw < M.l || hits(vx - vw, vx)) { vx = Math.max(refX[0], refX[1]) + 6; va = "start"; }
+      }
+      gr.append("text").attr("class", "lbl").attr("x", vx).attr("y", cy + 4).attr("text-anchor", va).style("font", "600 12px Inter, system-ui, sans-serif").style("fill", C.ink).text(vt);
       gr.on("pointerenter", function () {
         tip.textContent = "";
         tip.appendChild(h("div", null, h("b", null, e.name), e.org ? " · " + e.org : ""));

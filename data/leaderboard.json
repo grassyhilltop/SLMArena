@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T04:56:57+00:00",
+ "generated": "2026-11-22T06:08:11+00:00",
  "today": "2026-11-22",
  "epoch_fetched": "2026-11-22",
  "rule": {
@@ -4174,7 +4174,7 @@
   },
   {
    "name": "Muse Glimmer",
-   "org": "Meta",
+   "org": "Meta AI",
    "hf_repo": "meta-models/Muse-Glimmer-30B",
    "date": "2026-08-10",
    "params_b": 30.0,
