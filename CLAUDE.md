@@ -9,6 +9,8 @@
   secondary text (crossing dates, "Today", ranges) to quieter parts of the chart, or leave it to the tooltip.
 * The landing view must show the top 3, the key numbers and the whole forecast chart above the fold on a laptop
   screen (about 1440 x 860). Check with a screenshot before publishing.
+* Every data point on a chart shows what it is on hover (models, reference models, crossing points, the state of the
+  art). Number figures (Fig. 1, Fig. 2, ...) in titles and captions. Say "capability score (ECI)" before using "ECI" alone.
 
 ## How the site is built
 
@@ -17,7 +19,7 @@
 * The page refits the trend in the browser for each filter (region, model class, window). That code mirrors the
   statistics in `update_data.py` (best-at-release records, OLS, 90% prediction interval, crossing by quadratic);
   keep the two in step.
-* Repositories `tiny-LMArena` and `SLMArena` hold the same code; only `config/site.json` and the README title differ.
+* This is the only maintained repository. `grassyhilltop/tiny-LMArena` only redirects here; do not mirror changes to it.
 * Never send the owner's name, email or GitHub handle to external services (User-Agent stays neutral).
 * Estimates for unscored models (`config/claims.csv`, `estimate_unscored()`) are display-only: they must never feed
   ranks, trend fits, thresholds or alerts, and every claim needs a reference model with a known ECI from the same

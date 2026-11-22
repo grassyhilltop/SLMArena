@@ -607,6 +607,11 @@ def main():
         "frontier_fit": {"slope_per_year": round(frontier_fit["b"], 2), "r2": round(frontier_fit["r2"], 3),
                          "a": frontier_fit["a"], "b": frontier_fit["b"]} if frontier_fit else None,
         "thresholds": thresholds,
+        "anthropic_post": site.get("anthropic_post"),
+        # open models too big for one GPU, with known size: the page shows which ones the best SLMs now outscore
+        "large_open": sorted([{"model": m["model"], "params_b": m["params_b"], "eci": m["eci"], "date": m["date"], "org": m["org"]}
+                              for m in all_models if m["open"] and m.get("params_b") and m["params_b"] > max_params],
+                             key=lambda m: m["date"]),
         "fits": fits,
         "lag": lag,
         "monthly": monthly,

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T04:54:32+00:00",
+ "generated": "2026-11-22T04:56:57+00:00",
  "today": "2026-11-22",
  "epoch_fetched": "2026-11-22",
  "rule": {
@@ -2379,24 +2379,431 @@
    "ref_params_b": 744.0
   },
   {
+   "key": "frontier",
+   "label": "Today's SOTA",
+   "short": "today's SOTA",
+   "value": 173.4,
+   "ref_model": "Claude Fable 5.2",
+   "ref_date": "2026-11-09",
+   "ref_params_b": null
+  },
+  {
    "key": "frontier1y",
    "days": 365,
-   "label": "Frontier one year ago",
-   "short": "frontier of a year ago",
+   "label": "SOTA one year ago",
+   "short": "SOTA of a year ago",
    "value": 153.04,
    "ref_model": "Gemini 3 Pro",
    "ref_date": "2025-11-18",
    "as_of": "2025-11-22",
    "ref_params_b": null
+  }
+ ],
+ "anthropic_post": {
+  "date": "2026-10-12",
+  "url": "https://www.anthropic.com/research/self-replicating-ai",
+  "floor_model": "GLM-5.2",
+  "floor_eci": 151.8,
+  "best_model": "Qwen3.8-27B",
+  "best_eci": 149.4,
+  "gap": 2.4,
+  "slope": 13.7,
+  "r2": 0.95,
+  "class": "open-weight models of 30B total parameters or fewer",
+  "projection": "by the end of 2026"
+ },
+ "large_open": [
+  {
+   "model": "LLaMA-65B",
+   "params_b": 65.2,
+   "eci": 101.51,
+   "date": "2023-02-24",
+   "org": "Meta AI"
   },
   {
-   "key": "frontier",
-   "label": "Today's frontier",
-   "short": "today's frontier",
-   "value": 173.4,
-   "ref_model": "Claude Fable 5.2",
-   "ref_date": "2026-11-09",
-   "ref_params_b": null
+   "model": "Llama 2-70B",
+   "params_b": 70.0,
+   "eci": 105.73,
+   "date": "2023-07-18",
+   "org": "Meta AI"
+  },
+  {
+   "model": "Stable Beluga 2",
+   "params_b": 70.0,
+   "eci": 109.4,
+   "date": "2023-07-20",
+   "org": "Stability AI"
+  },
+  {
+   "model": "Falcon-180B",
+   "params_b": 180.0,
+   "eci": 107.04,
+   "date": "2023-09-06",
+   "org": "Technology Innovation Institute"
+  },
+  {
+   "model": "Mixtral 8x22B",
+   "params_b": 141.0,
+   "eci": 118.71,
+   "date": "2024-04-17",
+   "org": "Mistral AI"
+  },
+  {
+   "model": "Llama 3-70B",
+   "params_b": 70.0,
+   "eci": 121.33,
+   "date": "2024-04-18",
+   "org": "Meta AI"
+  },
+  {
+   "model": "DeepSeek-V2 (MoE-236B, May 2024)",
+   "params_b": 235.74,
+   "eci": 120.82,
+   "date": "2024-05-07",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "Qwen2-72B",
+   "params_b": 72.71,
+   "eci": 122.35,
+   "date": "2024-06-07",
+   "org": "Alibaba"
+  },
+  {
+   "model": "Llama 3.1-405B",
+   "params_b": 405.0,
+   "eci": 127.92,
+   "date": "2024-07-23",
+   "org": "Meta AI"
+  },
+  {
+   "model": "Llama 3.1-70B",
+   "params_b": 70.0,
+   "eci": 124.7,
+   "date": "2024-07-23",
+   "org": "Meta AI"
+  },
+  {
+   "model": "Mistral Large 2 (Jul 2024)",
+   "params_b": 122.61,
+   "eci": 126.4,
+   "date": "2024-07-24",
+   "org": "Mistral AI"
+  },
+  {
+   "model": "Qwen2.5-72B",
+   "params_b": 72.7,
+   "eci": 127.23,
+   "date": "2024-09-19",
+   "org": "Alibaba"
+  },
+  {
+   "model": "Llama 3.2 90B",
+   "params_b": 88.6,
+   "eci": 122.92,
+   "date": "2024-09-24",
+   "org": "Meta AI"
+  },
+  {
+   "model": "Llama 3.3 70B",
+   "params_b": 70.0,
+   "eci": 126.18,
+   "date": "2024-12-06",
+   "org": "Meta AI"
+  },
+  {
+   "model": "DeepSeek-V3",
+   "params_b": 671.0,
+   "eci": 131.69,
+   "date": "2024-12-26",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "DeepSeek-R1",
+   "params_b": 671.0,
+   "eci": 138.62,
+   "date": "2025-01-20",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "DeepSeek-V3 (Mar 2025)",
+   "params_b": 671.0,
+   "eci": 135.25,
+   "date": "2025-03-24",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "Llama 4 Scout",
+   "params_b": 109.0,
+   "eci": 127.75,
+   "date": "2025-04-05",
+   "org": "Meta AI"
+  },
+  {
+   "model": "Llama 4 Maverick",
+   "params_b": 400.0,
+   "eci": 132.19,
+   "date": "2025-04-06",
+   "org": "Meta AI"
+  },
+  {
+   "model": "Qwen3-235B-A22B",
+   "params_b": 235.0,
+   "eci": 138.4,
+   "date": "2025-04-28",
+   "org": "Alibaba"
+  },
+  {
+   "model": "DeepSeek-R1 (May 2025)",
+   "params_b": 671.0,
+   "eci": 140.73,
+   "date": "2025-05-28",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "Kimi K2 (Jul 2025)",
+   "params_b": 1026.41,
+   "eci": 141.27,
+   "date": "2025-07-12",
+   "org": "Moonshot"
+  },
+  {
+   "model": "Qwen3-235B-A22B-Thinking (Jul 2025)",
+   "params_b": 235.09,
+   "eci": 143.23,
+   "date": "2025-07-25",
+   "org": "Alibaba"
+  },
+  {
+   "model": "Qwen3-235B-A22B-Instruct (Jul 2025)",
+   "params_b": 235.09,
+   "eci": 138.03,
+   "date": "2025-07-25",
+   "org": "Alibaba"
+  },
+  {
+   "model": "gpt-oss-120b",
+   "params_b": 116.83,
+   "eci": 140.21,
+   "date": "2025-08-05",
+   "org": "OpenAI"
+  },
+  {
+   "model": "DeepSeek-V3.1",
+   "params_b": 671.0,
+   "eci": 140.88,
+   "date": "2025-08-21",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "DeepSeek-V3.2-Exp",
+   "params_b": 671.0,
+   "eci": 144.39,
+   "date": "2025-09-29",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "Kimi K2 Thinking",
+   "params_b": 1000.0,
+   "eci": 145.46,
+   "date": "2025-11-06",
+   "org": "Moonshot"
+  },
+  {
+   "model": "DeepSeek-V3.2",
+   "params_b": 685.36,
+   "eci": 146.26,
+   "date": "2025-12-01",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "GLM-4.7",
+   "params_b": 358.0,
+   "eci": 143.34,
+   "date": "2025-12-22",
+   "org": "Z.ai (Zhipu AI)"
+  },
+  {
+   "model": "Kimi K2.5",
+   "params_b": 1040.0,
+   "eci": 148.79,
+   "date": "2026-01-27",
+   "org": "Moonshot"
+  },
+  {
+   "model": "GLM-5",
+   "params_b": 744.0,
+   "eci": 146.53,
+   "date": "2026-02-11",
+   "org": "Z.ai (Zhipu AI)"
+  },
+  {
+   "model": "Qwen3.5 397B-A17B",
+   "params_b": 397.0,
+   "eci": 147.96,
+   "date": "2026-02-13",
+   "org": "Alibaba"
+  },
+  {
+   "model": "GLM-5.1",
+   "params_b": 754.0,
+   "eci": 150.71,
+   "date": "2026-04-07",
+   "org": "Z.ai (Zhipu AI)"
+  },
+  {
+   "model": "Kimi K2.6",
+   "params_b": 1040.0,
+   "eci": 151.6,
+   "date": "2026-04-20",
+   "org": "Moonshot"
+  },
+  {
+   "model": "DeepSeek-V4-Pro",
+   "params_b": 1600.0,
+   "eci": 150.19,
+   "date": "2026-04-24",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "DeepSeek-V4-Flash",
+   "params_b": 284.0,
+   "eci": 146.91,
+   "date": "2026-04-24",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "Mistral Medium 3.5",
+   "params_b": 128.0,
+   "eci": 141.58,
+   "date": "2026-04-28",
+   "org": "Mistral AI"
+  },
+  {
+   "model": "MiniMax-M3",
+   "params_b": 428.0,
+   "eci": 147.84,
+   "date": "2026-06-01",
+   "org": "MiniMax"
+  },
+  {
+   "model": "Nemotron 3 Ultra",
+   "params_b": 550.0,
+   "eci": 147.02,
+   "date": "2026-06-04",
+   "org": "Nvidia"
+  },
+  {
+   "model": "Kimi K2.7 Code",
+   "params_b": 1040.0,
+   "eci": 151.17,
+   "date": "2026-06-12",
+   "org": "Moonshot"
+  },
+  {
+   "model": "GLM-5.2",
+   "params_b": 744.0,
+   "eci": 153.07,
+   "date": "2026-06-16",
+   "org": "Z.ai (Zhipu AI)"
+  },
+  {
+   "model": "Inkling-Small",
+   "params_b": 276.0,
+   "eci": 150.77,
+   "date": "2026-07-15",
+   "org": "Thinking Machines"
+  },
+  {
+   "model": "Inkling",
+   "params_b": 975.0,
+   "eci": 148.39,
+   "date": "2026-07-15",
+   "org": "Thinking Machines"
+  },
+  {
+   "model": "Kimi K3",
+   "params_b": 2800.0,
+   "eci": 158.61,
+   "date": "2026-07-16",
+   "org": "Moonshot"
+  },
+  {
+   "model": "DeepSeek V4 Flash 0731",
+   "params_b": 284.0,
+   "eci": 154.43,
+   "date": "2026-07-31",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "DeepSeek V4 Pro 0813",
+   "params_b": 1600.0,
+   "eci": 155.96,
+   "date": "2026-08-13",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "GLM-5.3",
+   "params_b": 744.0,
+   "eci": 157.1,
+   "date": "2026-08-14",
+   "org": "Z.ai (Zhipu AI)"
+  },
+  {
+   "model": "GLM-5.3-Flash",
+   "params_b": 320.0,
+   "eci": 153.77,
+   "date": "2026-08-20",
+   "org": "Z.ai (Zhipu AI)"
+  },
+  {
+   "model": "DeepSeek V4.1 Flash",
+   "params_b": 552.0,
+   "eci": 157.01,
+   "date": "2026-09-09",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "Beam 1.0",
+   "params_b": 501.0,
+   "eci": 150.84,
+   "date": "2026-10-05",
+   "org": "Reflection"
+  },
+  {
+   "model": "Mistral Large 4 Preview",
+   "params_b": 1000.0,
+   "eci": 152.74,
+   "date": "2026-10-06",
+   "org": "Mistral AI"
+  },
+  {
+   "model": "Muse Spark Open",
+   "params_b": 816.0,
+   "eci": 155.47,
+   "date": "2026-10-15",
+   "org": "Meta AI"
+  },
+  {
+   "model": "DeepSeek V4.1 Flash 1017",
+   "params_b": 763.21,
+   "eci": 159.41,
+   "date": "2026-10-17",
+   "org": "DeepSeek"
+  },
+  {
+   "model": "Kimi K3.1 Pro",
+   "params_b": 2800.0,
+   "eci": 161.2,
+   "date": "2026-10-23",
+   "org": "Moonshot"
+  },
+  {
+   "model": "Mistral Large 4",
+   "params_b": 1050.0,
+   "eci": 154.57,
+   "date": "2026-10-29",
+   "org": "Mistral AI"
   }
  ],
  "fits": {
@@ -2431,21 +2838,21 @@
      },
      "crossed_by": null
     },
-    "frontier1y": {
-     "gap": 0.41,
-     "trend": {
-      "date": "2026-07-20",
-      "early": "2026-02-13",
-      "late": "2027-01-06"
-     },
-     "crossed_by": null
-    },
     "frontier": {
      "gap": 20.77,
      "trend": {
       "date": "2027-09-29",
       "early": "2027-04-08",
       "late": "2028-04-13"
+     },
+     "crossed_by": null
+    },
+    "frontier1y": {
+     "gap": 0.41,
+     "trend": {
+      "date": "2026-07-20",
+      "early": "2026-02-13",
+      "late": "2027-01-06"
      },
      "crossed_by": null
     }
@@ -2482,21 +2889,21 @@
      },
      "crossed_by": null
     },
-    "frontier1y": {
-     "gap": 0.41,
-     "trend": {
-      "date": "2026-11-03",
-      "early": "2026-06-19",
-      "late": "2027-04-20"
-     },
-     "crossed_by": null
-    },
     "frontier": {
      "gap": 20.77,
      "trend": {
       "date": "2028-08-12",
       "early": "2028-01-16",
       "late": "2029-06-05"
+     },
+     "crossed_by": null
+    },
+    "frontier1y": {
+     "gap": 0.41,
+     "trend": {
+      "date": "2026-11-03",
+      "early": "2026-06-19",
+      "late": "2027-04-20"
      },
      "crossed_by": null
     }
@@ -2533,21 +2940,21 @@
      },
      "crossed_by": null
     },
-    "frontier1y": {
-     "gap": 0.41,
-     "trend": {
-      "date": "2026-08-05",
-      "early": "2026-03-10",
-      "late": "2027-01-11"
-     },
-     "crossed_by": null
-    },
     "frontier": {
      "gap": 20.77,
      "trend": {
       "date": "2027-09-25",
       "early": "2027-04-15",
       "late": "2028-03-25"
+     },
+     "crossed_by": null
+    },
+    "frontier1y": {
+     "gap": 0.41,
+     "trend": {
+      "date": "2026-08-05",
+      "early": "2026-03-10",
+      "late": "2027-01-11"
      },
      "crossed_by": null
     }
@@ -2584,21 +2991,21 @@
      },
      "crossed_by": null
     },
-    "frontier1y": {
-     "gap": 0.41,
-     "trend": {
-      "date": "2026-11-18",
-      "early": "2026-06-03",
-      "late": "2027-06-30"
-     },
-     "crossed_by": null
-    },
     "frontier": {
      "gap": 20.77,
      "trend": {
       "date": "2028-07-12",
       "early": "2027-11-06",
       "late": "2029-08-07"
+     },
+     "crossed_by": null
+    },
+    "frontier1y": {
+     "gap": 0.41,
+     "trend": {
+      "date": "2026-11-18",
+      "early": "2026-06-03",
+      "late": "2027-06-30"
      },
      "crossed_by": null
     }

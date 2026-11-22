@@ -29,22 +29,35 @@
       "source": "https://www.anthropic.com/research/self-replicating-ai"
     },
     {
+      "key": "frontier",
+      "kind": "frontier_now",
+      "label": "Today's SOTA",
+      "short": "today's SOTA"
+    },
+    {
       "key": "frontier1y",
       "kind": "frontier_ago",
       "days": 365,
-      "label": "Frontier one year ago",
-      "short": "frontier of a year ago"
-    },
-    {
-      "key": "frontier",
-      "kind": "frontier_now",
-      "label": "Today's frontier",
-      "short": "today's frontier"
+      "label": "SOTA one year ago",
+      "short": "SOTA of a year ago"
     }
   ],
   "newsletter": {
     "provider": "buttondown",
     "username": "tinylm",
     "send_alerts": true
+  },
+  "anthropic_post": {
+    "date": "2026-10-12",
+    "url": "https://www.anthropic.com/research/self-replicating-ai",
+    "floor_model": "GLM-5.2",
+    "floor_eci": 151.8,
+    "best_model": "Qwen3.8-27B",
+    "best_eci": 149.4,
+    "gap": 2.4,
+    "slope": 13.7,
+    "r2": 0.95,
+    "class": "open-weight models of 30B total parameters or fewer",
+    "projection": "by the end of 2026"
   }
 }
