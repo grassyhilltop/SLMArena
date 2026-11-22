@@ -9,7 +9,7 @@
    strip, then Fig. 1 (question tabs, a thin toolbar with model filters left and time controls right, the chart,
    a short legend under it) beside a sidebar with three plain-language findings and the top 10. "Wide" hides the
    sidebar. Below the fold: findings, full table, contenders, gap analysis, method. Theme: beige (default), white,
-   dark via data-skin; with no choice, the OS setting picks beige or dark. */
+   dark via data-skin; beige for everyone until the visitor picks another. */
 :root {
   --bg: #f6f5f0;
   --surface: #fdfdfb;
@@ -151,7 +151,7 @@ select.sel:hover { border-color: var(--ink-3); }
 .pod-note { font-size: 11.5px; color: var(--ink-3); }
 
 /* dashboard */
-.dash { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; padding-block: 12px 0; align-items: start; }
+.dash { display: grid; grid-template-columns: minmax(0, 1fr) 312px; gap: 18px; padding-block: 12px 0; align-items: start; }
 .dash.wide { grid-template-columns: minmax(0, 1fr); }
 .dash.wide .side { display: none; }
 .card { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; }
@@ -169,7 +169,7 @@ select.sel:hover { border-color: var(--ink-3); }
 .qtabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }
 .qtabs .spacer { flex: 1 1 auto; }
 #btn-wide { align-self: center; margin-left: 6px; padding: 5px 9px; font-size: 12px; }
-.toolbar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-bottom: 6px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: 4px 0 8px; padding-top: 8px; border-top: 1px solid var(--rule); }
 .toolbar .grp { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; }
 .toolbar .spacer { flex: 1 1 auto; }
 details.more { position: relative; }
@@ -220,15 +220,15 @@ details.more[open] > summary { color: var(--ink); border-color: var(--ink-3); }
 /* sidebar: three questions, then the top 10 */
 .side { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .metrics { padding: 4px 12px; }
-.metric { display: flex; flex-direction: column; gap: 3px; width: 100%; text-align: left; background: none; border: 0; color: inherit; font: inherit; cursor: pointer; padding: 11px 4px 11px 8px; border-radius: 0; border-left: 3px solid transparent; margin-left: -8px; }
+.metric { display: flex; flex-direction: column; gap: 3px; width: 100%; text-align: left; background: none; border: 0; color: inherit; font: inherit; cursor: pointer; padding: 9px 4px 9px 8px; border-radius: 0; border-left: 3px solid transparent; margin-left: -8px; }
 .metric + .metric { border-top: 1px solid var(--rule); }
-.metric .q { font: 500 11px/1.25 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); display: flex; gap: 7px; align-items: baseline; }
+.metric .q { font: 600 14px/1.3 var(--sans); color: var(--ink-2); display: flex; gap: 7px; align-items: baseline; }
 .metric .q i { width: 12px; height: 0; border-top: 2px solid; display: inline-block; flex: none; transform: translateY(-3px); }
 .metric .ans { font: 600 17px/1.25 var(--sans); letter-spacing: -0.01em; color: var(--ink); }
-.metric .why { font-size: 12.5px; line-height: 1.4; color: var(--ink-2); }
+.metric .why { font-size: 12px; line-height: 1.4; font-style: italic; color: var(--ink-3); }
 .metric[aria-pressed="true"] { border-left-color: var(--ink); }
 .metric[aria-pressed="true"] .q { color: var(--ink); }
-.metric:hover .why { color: var(--ink); }
+.metric:hover .why { color: var(--ink-2); }
 nav.jump { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; padding-block: 12px 0; }
 nav.jump a { color: var(--ink-2); text-decoration: none; }
 nav.jump a:hover { color: var(--ink); text-decoration: underline; }
@@ -250,13 +250,15 @@ nav.jump a:hover { color: var(--ink); text-decoration: underline; }
 .top15 { padding: 16px 16px 12px; }
 .top15 h3 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
 table { border-collapse: collapse; width: 100%; }
-.t15 { margin-top: 10px; font-size: 13.5px; }
+.t15 { margin-top: 10px; font-size: 13.5px; width: 100%; table-layout: fixed; }
+.t15 th:nth-child(1) { width: 28px; } .t15 th:nth-child(3) { width: 50px; } .t15 th:nth-child(4) { width: 54px; }
 .t15 th { font: 500 10.5px/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); text-align: right; padding: 0 0 8px; font-weight: 500; }
 .t15 th:nth-child(2) { text-align: left; }
-.t15 td { padding: 6px 0; border-top: 1px solid var(--rule); text-align: right; white-space: nowrap; }
-.t15 td:nth-child(1) { width: 30px; text-align: left; }
+.t15 td { padding: 4px 0; border-top: 1px solid var(--rule); text-align: right; white-space: nowrap; }
+.t15 td:nth-child(1) { text-align: left; }
+.t15 td:nth-child(4) { font-size: 12px; color: var(--ink-3); }
 .t15 th + th, .t15 td + td { padding-left: 10px; }
-.t15 td:nth-child(2) { text-align: left; white-space: normal; padding-right: 8px; }
+.t15 td:nth-child(2) { text-align: left; overflow: hidden; text-overflow: ellipsis; padding-right: 4px; }
 .t15 tr.hl td { background: var(--band); }
 .t15 a { text-decoration: none; }
 .t15 a:hover { text-decoration: underline; }
@@ -373,6 +375,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
           <div class="grp time"><div class="ctl"><label for="sel-from">From</label><select class="sel" id="sel-from"></select></div>
             <div class="ctl"><label for="sel-to">To</label><select class="sel" id="sel-to"></select></div>
             <button type="button" class="tbtn wide-btn" id="btn-wide" aria-pressed="false" title="Hide the sidebar and widen the chart">⤢ Wide</button></div></div>
+        <div class="chart" id="hero-chart"></div>
         <div class="toolbar">
           <div class="grp">
             <div class="ctl"><label for="sel-region">Models from</label><select class="sel" id="sel-region"></select></div>
@@ -387,7 +390,6 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
           <div class="ctl"><span id="lbl-def">Model class</span><div class="seg" id="ctl-def" role="group" aria-labelledby="lbl-def"></div></div>
           <div class="ctl"><span id="lbl-window">Trend fit</span><div class="seg" id="ctl-window" role="group" aria-labelledby="lbl-window"></div></div>
         </div>
-        <div class="chart" id="hero-chart"></div>
         <div class="legend-row"><div><div class="legend" id="hero-legend"></div><div class="legend minor" id="hero-legend2"></div></div><div id="hero-colorby"></div></div>
         <figcaption class="chart-foot">
           <span><span class="fig">Fig. 1.</span> <span id="hero-fitnote"></span></span>
@@ -717,7 +719,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
   state.vram = GPU.indexOf(+state.vram) < 0 ? 32 : +state.vram;
   if (["beige", "white", "dark"].indexOf(state.skin) < 0) state.skin = null;
   function save() { try { localStorage.setItem("slm-state", JSON.stringify({ vram: state.vram, skin: state.skin, wide: state.wide })); } catch (e) {} }
-  function applySkin() { if (state.skin) document.documentElement.setAttribute("data-skin", state.skin); else document.documentElement.removeAttribute("data-skin"); }
+  function applySkin() { document.documentElement.setAttribute("data-skin", state.skin || "beige"); }
   applySkin();
 
   function activeOf(m) { return m.active_b || m.params_b || 99; }
@@ -771,33 +773,37 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
   // ---------- plain-language answers to the three questions
   // Fewer than five best-at-release models: the band is too wide for a date to mean anything.
   function fewPts() { return !!(MODEL.F && MODEL.F.points < 5); }
-  function fewAns(s, nm) { return { ans: "Too few models to project", why: "Only " + MODEL.F.points + " best-at-release " + nm + " since " + fMon(MODEL.F.start) + ", too few for a reliable date. Best: " + s.best.name + " (" + f1(s.best.eci) + "), " + f1(s.gap) + " below " + s.t.ref_model + "." }; }
+  function fewAns(s, nm) { return { ans: "Too few models to project", why: "Only " + MODEL.F.points + " best-at-release models since " + fMon(MODEL.F.start) + ". Best: " + s.best.name + ", " + f1(s.gap) + " below " + s.t.ref_model + "." }; }
   // Epoch names some models with their date, e.g. "GPT-4 (Mar 2023)"; do not repeat it.
   function hasMon(name) { return /\(\w{3} \d{4}\)$/.test(name || ""); }
+  // size of a frontier model when Epoch lists it (open models); closed models do not publish one
+  function sizeOfModel(name) {
+    var m = (D.large_open || []).concat(D.slms).filter(function (o) { return (o.model || o.name) === name || o.name === name; })[0];
+    return m && m.params_b ? sizeLabel(m.params_b) + " parameters" : "size undisclosed";
+  }
   function fromMon(name, date) { return hasMon(name) ? "" : " from " + fMon(date); }
   function answer(key) {
     var s = status(key); if (!s || !s.best) return null;
     var b = s.best, t = s.t, nm = scopeNoun();
     if (key === "selfrep") {
-      if (s.kind === "crossed") return { ans: "Yes, on the ECI: " + fMon(s.crossed.date), why: s.crossed.name + " scored " + f1(s.crossed.eci) + ", at or above " + t.ref_model + " (" + f1(t.value) + "), the only open-weight model that replicated end to end in Anthropic's simplified tests. The ECI is a rough proxy: this does not show that " + s.crossed.name + " can self-replicate." };
+      if (s.kind === "crossed") return { ans: "Yes, on the ECI: " + fMon(s.crossed.date), why: s.crossed.name + " scored " + f1(s.crossed.eci) + ", at or above " + t.ref_model + " (" + f1(t.value) + "). The ECI is a rough proxy, not a replication test." };
       if (fewPts()) return fewAns(s, nm);
-      if (s.kind === "due") return { ans: "Not yet · trend passed it " + fMon(s.trend.date), why: "No released model yet: the best, " + b.name + ", is " + f1(s.gap) + " below " + t.ref_model + " (" + f1(t.value) + ")" + (inError(b, t) ? ", inside the error bars." : ".") };
-      if (s.kind === "ahead") { var mo1 = Math.max(1, Math.round(monthsBetween(D.today, s.trend.date))); return { ans: "On trend in " + fMon(s.trend.date), why: "About " + mo1 + (mo1 === 1 ? " month" : " months") + " away (" + rangeText(s.trend) + "). Best: " + b.name + " (" + f1(b.eci) + "), " + f1(s.gap) + " below " + t.ref_model + "." }; }
+      if (s.kind === "due") return { ans: "Not yet · trend passed it " + fMon(s.trend.date), why: "No released model yet: " + b.name + " is " + f1(s.gap) + " below " + t.ref_model + " (" + f1(t.value) + ")." };
+      if (s.kind === "ahead") { var mo1 = Math.max(1, Math.round(monthsBetween(D.today, s.trend.date))); return { ans: "On trend in " + fMon(s.trend.date), why: "About " + mo1 + (mo1 === 1 ? " month" : " months") + " away. Best: " + b.name + " (" + f1(b.eci) + "), " + f1(s.gap) + " below " + t.ref_model + "." }; }
       return { ans: "No trend yet", why: "Too few best-at-release " + nm + " to project. Best: " + b.name + " (" + f1(b.eci) + ")." };
     }
     if (key === "frontier") {
       if (s.kind === "crossed") return { ans: "Already matched", why: s.crossed.name + " scores " + f1(s.crossed.eci) + ", at or above " + t.ref_model + "." };
       if (!s.trend) return { ans: "No trend yet", why: "Best: " + b.name + " (" + f1(b.eci) + "), " + f1(s.gap) + " below " + t.ref_model + " (" + f1(t.value) + ")." };
       if (fewPts()) return fewAns(s, nm);
-      if (s.kind === "due") return { ans: "Not yet · trend passed it " + fMon(s.trend.date), why: "No released SLM has matched " + t.ref_model + " (" + f1(t.value) + "), today's best model of any size: the best, " + b.name + ", is " + f1(s.gap) + " below (" + rangeText(s.trend) + ")." };
+      if (s.kind === "due") return { ans: "Not yet · trend passed it " + fMon(s.trend.date), why: "No released SLM yet: " + b.name + " is " + f1(s.gap) + " below " + t.ref_model + " (" + f1(t.value) + ")." };
       var mo = Math.round(monthsBetween(D.today, s.trend.date));
-      return { ans: (mo > 0 ? "≈ " + mo + " months · " : "") + fMon(s.trend.date), why: "On trend, " + nm + " reach " + t.ref_model + " (" + f1(t.value) + "), today's best model of any size (" + rangeText(s.trend) + "). The best SLM is " + f1(s.gap) + " below." };
+      return { ans: (mo > 0 ? "≈ " + mo + " months · " : "") + fMon(s.trend.date), why: "On trend, " + nm + " reach " + t.ref_model + " (" + f1(t.value) + "). The best SLM is " + f1(s.gap) + " below." };
     }
     var L = MODEL.lag, bt = MODEL.beaten[0];
     if (!L) return { ans: "At the frontier", why: b.name + " is the best model of any size." };
     return { ans: "≈ the frontier of " + Math.round(L.months) + " months ago",
-      why: b.name + " (" + sizeLabel(b.params_b) + ", " + f1(b.eci) + "): the best model of any size first reached that score " + (hasMon(L.model) ? "" : "in " + fMon(L.date) + ", ") + "with " + L.model + ", at " + f1(L.eci) + "." +
-        (bt ? " It outscores " + bt.model + ", a " + sizeLabel(bt.params_b) + "-parameter open model" + fromMon(bt.model, bt.date) + "." : "") };
+      why: b.name + " (" + sizeLabel(b.params_b) + ") scores " + f1(b.eci) + ". The frontier first passed that with " + L.model + " (" + f1(L.eci) + (hasMon(L.model) ? "" : ", " + fMon(L.date)) + "), " + sizeOfModel(L.model) + "." };
   }
   function headline(key) {
     var s = status(key);
@@ -810,17 +816,17 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
     if (key === "selfrep") {
       if (s.kind === "crossed") return "A released SLM has crossed Anthropic's self-replication floor (" + t.ref_model + ", " + f1(t.value) + "): " + s.crossed.name + " scores " + f1(s.crossed.eci) + ".";
       if (fewPts()) return "Only " + F.points + " best-at-release " + nm + " since " + fMon(F.start) + ": too few to project a date. The best, " + b.name + ", is " + f1(s.gap) + " below " + t.ref_model + " (" + f1(t.value) + ").";
-      if (s.kind === "due") return "The trend line for " + nm + " crossed Anthropic's self-replication floor (" + t.ref_model + ", " + f1(t.value) + ") in " + fMon(s.trend.date) + " (" + rangeText(s.trend) + "). No released SLM has crossed yet: the best, " + b.name + ", is " + f1(s.gap) + " below" + (inError(b, t) ? ", inside the error bars." : ".");
-      if (s.kind === "ahead") return "On trend, " + nm + " reach Anthropic's self-replication floor (" + t.ref_model + ", " + f1(t.value) + ") in " + fMon(s.trend.date) + " (" + rangeText(s.trend) + "). The best today, " + b.name + ", is " + f1(s.gap) + " below.";
+      if (s.kind === "due") return "The trend line for " + nm + " crossed Anthropic's self-replication floor (" + t.ref_model + ", " + f1(t.value) + ") in " + fMon(s.trend.date) + ". No released SLM has crossed yet: the best, " + b.name + ", is " + f1(s.gap) + " below" + (inError(b, t) ? ", inside the error bars." : ".");
+      if (s.kind === "ahead") return "On trend, " + nm + " reach Anthropic's self-replication floor (" + t.ref_model + ", " + f1(t.value) + ") in " + fMon(s.trend.date) + ". The best today, " + b.name + ", is " + f1(s.gap) + " below.";
       return F ? "The trend is not rising, so no crossing date can be projected." : "Too few best-at-release " + nm + " to fit a trend.";
     }
     if (key === "frontier") {
       if (s.kind === "crossed") return s.crossed.name + " already matches today's best model, " + t.ref_model + " (" + f1(t.value) + ").";
       if (!s.trend) return F ? "The trend is not rising, so no date can be projected." : "Too few best-at-release " + nm + " to fit a trend.";
       if (fewPts()) return "Only " + F.points + " best-at-release " + nm + " since " + fMon(F.start) + ": too few to project a date. The best, " + b.name + ", is " + f1(s.gap) + " below today's best model, " + t.ref_model + " (" + f1(t.value) + ").";
-      if (s.kind === "due") return "The trend line for " + nm + " passed today's best model, " + t.ref_model + " (" + f1(t.value) + "), in " + fMon(s.trend.date) + " (" + rangeText(s.trend) + "), but no released SLM has matched it: the best, " + b.name + ", is " + f1(s.gap) + " below.";
+      if (s.kind === "due") return "The trend line for " + nm + " passed today's best model, " + t.ref_model + " (" + f1(t.value) + "), in " + fMon(s.trend.date) + ", but no released SLM has matched it: the best, " + b.name + ", is " + f1(s.gap) + " below.";
       var mo = Math.round(monthsBetween(D.today, s.trend.date));
-      return "On trend, " + nm + " match today's best model, " + t.ref_model + " (" + f1(t.value) + "), around " + fMon(s.trend.date) + (mo > 0 ? ", about " + mo + " months from now" : "") + " (" + rangeText(s.trend) + ").";
+      return "On trend, " + nm + " match today's best model, " + t.ref_model + " (" + f1(t.value) + "), around " + fMon(s.trend.date) + (mo > 0 ? ", about " + mo + " months from now" : "") + ".";
     }
     var L = MODEL.lag, bt = MODEL.beaten[0];
     if (!L) return b.name + " is the best model of any size.";
@@ -871,7 +877,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
     renderSkin();
   }
   function renderSkin() {
-    var eff = state.skin || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "beige");
+    var eff = state.skin || "beige";
     var box = $("#ctl-skin"); box.textContent = "";
     [["beige", "Beige"], ["white", "White"], ["dark", "Dark"]].forEach(function (o) {
       box.appendChild(h("button", { type: "button", "aria-pressed": String(eff === o[0]), onclick: function () {
@@ -998,7 +1004,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
   function heroHeight(box, W) {
     if (W < 560) return Math.round(Math.max(300, Math.min(420, W * 0.85)));
     var top = box.getBoundingClientRect().top + window.scrollY;
-    var fit = window.innerHeight - top - 118;
+    var fit = window.innerHeight - top - 164;
     if (window.innerWidth <= 980) fit = W * 0.62;
     return Math.round(Math.max(320, Math.min(state.wide ? 600 : 560, fit, W * 0.72)));
   }
@@ -1262,12 +1268,16 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
         [[bx0 - 7, mid, "end"], [bx0 + 7, mid, "start"], [bx0 - 7, ty + 16, "end"], [bx0 + 7, ty + 16, "start"]]);
     }
     if (cdOn) {
-      // the crossing label sits on or beside its own dashed line and never crosses Today
-      var verb = { selfrep: "crosses the floor", frontier: "reaches today's SOTA", frontier1y: "reaches the SOTA of a year ago" }[key] || "crosses";
-      var ct = (narrow ? "Trend " : "SLM trend " + verb + " · ") + "~" + fMon(ts.trend.date), cx = x(cd), cy = (ty + H - M.b) / 2;
-      var cc = [[cx, cy, "middle"], [cx - 8, cy, "end"], [cx + 8, cy, "start"], [cx, cy - 28, "middle"], [cx - 8, cy - 28, "end"], [cx + 8, cy - 28, "start"],
-        [cx, cy + 28, "middle"], [cx - 8, cy + 28, "end"], [cx + 8, cy + 28, "start"], [cx, cy - 56, "middle"], [cx, cy + 56, "middle"]];
-      if (!place([{ text: ct, font: F12, fill: C.ink }], cc, false, true) && !narrow) place([{ text: "Trend ~" + fMon(ts.trend.date), font: F12, fill: C.ink }], cc, false, true);
+      // the crossing label: two lines in the trend's colour, set left of its own dashed line and low on the chart,
+      // so it reads as one unit with that line; it moves right of the line only when the left side is taken
+      var past = cd <= today, thName = { selfrep: "self-replication threshold", frontier: "today's SOTA", frontier1y: "the SOTA of a year ago" }[key] || "the threshold";
+      var cl1 = narrow ? (past ? "Trend crossed" : "Trend reaches") : "SLM trend " + (past ? "surpassed " : "reaches ") + thName;
+      var clL = [{ text: cl1, font: F12, fill: C.slm }, { text: "~" + fMon(ts.trend.date), font: F11, fill: C.ink3 }];
+      var cx = x(cd), cc = [];
+      [0.78, 0.62, 0.9, 0.46, 0.3].forEach(function (f) { cc.push([cx - 8, ty + (H - M.b - 20 - ty) * f, "end"]); });
+      [0.78, 0.62, 0.9, 0.46, 0.3].forEach(function (f) { cc.push([cx + 8, ty + (H - M.b - 20 - ty) * f, "start"]); });
+      if (!place(clL, cc, false, true) && !narrow && !place([{ text: "SLM trend " + (past ? "surpassed" : "reaches"), font: F12, fill: C.slm }, { text: thName, font: F12, fill: C.slm }, clL[1]], cc, false, true))
+        place([{ text: "SLM trend", font: F12, fill: C.slm }, clL[1]], cc, false, true);
     }
     pts.filter(function (p) { return p.kind === "est"; }).sort(function (a, b) { return b.m.eci - a.m.eci; }).forEach(function (p) {
       place([{ text: p.m.name + " (est.)", font: "italic 500 11.5px Inter, system-ui, sans-serif", fill: C.ink2, grp: colored ? groupOf(p.est) : null }],
@@ -1415,7 +1425,7 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
       var link = hf(m);
       body.appendChild(h("tr", { onmouseenter: function () { var p = HERO.pts && HERO.pts.filter(function (q) { return q.kind === "slm" && q.m.id === m.id; })[0]; if (p) HERO.show(p); }, onmouseleave: function () { if (HERO.hide) HERO.hide(); } },
         h("td", null, h("span", { cls: "chip " + (i < 3 ? "r" + (i + 1) : "rn") }, String(i + 1))),
-        h("td", null, link ? h("a", { href: link, target: "_blank", rel: "noopener" }, m.name) : m.name),
+        h("td", { title: m.name }, link ? h("a", { href: link, target: "_blank", rel: "noopener" }, m.name) : m.name),
         h("td", { cls: "num" }, f1(m.eci)),
         h("td", { cls: "num soft" }, m.vram4_gb + " GB")));
     });
