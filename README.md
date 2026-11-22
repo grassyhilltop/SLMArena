@@ -3,32 +3,31 @@
 **A leaderboard and forecast of the most capable language models that run on one 32 GB GPU.**
 Live site: https://grassyhilltop.github.io/SLMArena/
 
-By Joel Sadler, University of Virginia, School of Data Science. This repository is mirrored as
-[tiny-LMArena](https://github.com/grassyhilltop/tiny-LMArena); the code is the same and only `config/site.json` differs.
+By Joel Sadler, University of Virginia, School of Data Science. The earlier name, tiny-LMArena, redirects here.
 
 ## What it shows
 
-* **Top 3 and full leaderboard** of single-GPU models, ranked by the
+* **Top 3 and full leaderboard** of single-GPU models, ranked by their capability score on the
   [Epoch Capabilities Index](https://epoch.ai/eci) (ECI). Each row has the ECI interval, Rank (UB), parameters,
-  4-bit weight size, the smallest GPU it fits, and a link to its Hugging Face model card.
-* **Forecast chart**, extending Figure 4 of Anthropic's
+  4-bit weight size, the smallest GPU it fits, and a link to its Hugging Face model card. Filters for GPU memory,
+  release date, region and active parameters; CSV download of the filtered table.
+* **Fig. 1, the forecast chart**, building on Figure 4 of Anthropic's
   [“AI models may be capable of self-replicating without access to a datacenter”](https://www.anthropic.com/research/self-replicating-ai)
   (William Zhou and Daniel Freeman, 12 October 2026): a least-squares trend through the best-at-release models, a 90%
-  prediction band, and the projected date the trend crosses a chosen threshold:
-  * the **self-replication floor** (GLM-5.2's current ECI),
-  * the **frontier one year ago** (best ECI of any model released a year before today),
-  * **today's frontier** (best ECI of any model today).
-* **Frontier gap**: best ECI to date of any model vs. single-GPU models, and how many months each new single-GPU record
-  trailed the frontier.
-* **Awaiting an ECI score**: new single-GPU models Epoch has not scored yet (from `config/watchlist.csv` and the
-  Artificial Analysis snapshot).
-* **Second opinion**: the Artificial Analysis Intelligence Index for small open models.
-* **Estimates for unscored models** (off by default, "Show estimates" under the chart): an ECI estimate from benchmark
-  scores developers published, anchored to a model with a known ECI in the same table and converted with Epoch's
-  benchmark slope; drawn as hollow diamonds with a 90% range, never used for ranks, fits, thresholds or alerts.
-* **Filters and views**: models from all labs, US, China or the rest of the world (refits the trend per group);
-  a state-of-the-art overlay (best ECI of any model, with its own trend); and a projection horizon out to 2027,
-  2028 or 2030, with a hover readout of the projected ECI at any date.
+  prediction band, and where the trend meets one of three bars, each tied to a plain question:
+  * **Can SLMs self-replicate?** Anthropic's self-replication floor (GLM-5.2's current ECI).
+  * **When do SLMs match today's best model?** Time to today's state of the art (best ECI of any model today).
+  * **How good is today's best SLM?** Frontier lag: which past frontier it matches, and which much larger open models
+    it outscores.
+* **Controls**: models from all labs, US, China or the rest of the world, and by active parameters (dense, mixture of
+  experts, ≤ 4B active), each refitting the trend; switches for the state of the art and for estimates; From/To time
+  controls (full history to the last six months); colour by region or lab; a wide-chart mode; beige, white or dark
+  themes. Hover any point or date for details; download the chart data as CSV.
+* **Findings**: the headline events (measured, on trend, projected), and what changed since Anthropic's post.
+* **Contenders**: new single-GPU models Epoch has not scored yet, with estimates from their developers' benchmark
+  claims (Fig. 5) where possible, anchored to a model with a known ECI in the same table and converted with Epoch's
+  benchmark slope. Estimates are never used for ranks, fits, thresholds or alerts.
+* **Frontier gap** (Figs. 2–3) and a **second opinion** from the Artificial Analysis Intelligence Index (Fig. 4).
 
 ## Definition of a single-GPU model (SLM)
 
