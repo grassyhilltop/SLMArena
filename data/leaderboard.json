@@ -1,7 +1,7 @@
 {
- "generated": "2026-11-23T22:39:02+00:00",
- "today": "2026-11-23",
- "epoch_fetched": "2026-11-23",
+ "generated": "2026-11-24T16:04:34+00:00",
+ "today": "2026-11-24",
+ "epoch_fetched": "2026-11-24",
  "rule": {
   "max_params_b": 48.0,
   "vram_gb": 32,
@@ -2395,7 +2395,7 @@
    "value": 153.04,
    "ref_model": "Gemini 3 Pro",
    "ref_date": "2025-11-18",
-   "as_of": "2025-11-23",
+   "as_of": "2025-11-24",
    "ref_params_b": null
   }
  ],
@@ -2821,7 +2821,7 @@
    "sxx": 14.480504770900598,
    "s": 3.8617661322638153,
    "t": 1.771,
-   "trend_today": 158.91,
+   "trend_today": 158.96,
    "best": {
     "id": "qwen3-8-27b",
     "name": "Qwen3.8-27B",
@@ -2861,7 +2861,7 @@
   "fit32|last24": {
    "def": "fit32",
    "window": "last24",
-   "start": "2024-11-23",
+   "start": "2024-11-24",
    "points": 8,
    "slope_per_year": 11.47,
    "r2": 0.939,
@@ -2872,7 +2872,7 @@
    "sxx": 2.644880706481125,
    "s": 1.9376834336261606,
    "t": 1.943,
-   "trend_today": 153.68,
+   "trend_today": 153.71,
    "best": {
     "id": "qwen3-8-27b",
     "name": "Qwen3.8-27B",
@@ -2923,7 +2923,7 @@
    "sxx": 16.55976494725082,
    "s": 3.8279151687906112,
    "t": 1.761,
-   "trend_today": 158.41,
+   "trend_today": 158.46,
    "best": {
     "id": "qwen3-8-27b",
     "name": "Qwen3.8-27B",
@@ -2963,7 +2963,7 @@
   "anthropic|last24": {
    "def": "anthropic",
    "window": "last24",
-   "start": "2024-11-23",
+   "start": "2024-11-24",
    "points": 8,
    "slope_per_year": 12.35,
    "r2": 0.904,
@@ -2974,7 +2974,7 @@
    "sxx": 2.480818122844923,
    "s": 2.5871197212695938,
    "t": 1.943,
-   "trend_today": 153.21,
+   "trend_today": 153.24,
    "best": {
     "id": "qwen3-8-27b",
     "name": "Qwen3.8-27B",
@@ -3611,7 +3611,7 @@
    "anthropic": 152.63
   },
   {
-   "date": "2026-11-23",
+   "date": "2026-11-24",
    "frontier": 173.4,
    "fit32": 152.63,
    "anthropic": 152.63
