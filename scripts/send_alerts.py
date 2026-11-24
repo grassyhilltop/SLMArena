@@ -7,6 +7,11 @@ is true in config/site.json, the same text is also sent to the Buttondown mailin
 
     python3 scripts/send_alerts.py           # announce pending events, if any
     python3 scripts/send_alerts.py --test    # announce a clearly labelled test event
+    python3 scripts/send_alerts.py --test-email   # email only: a test sent to the newsletter's own inbox
+
+--test-email creates a Buttondown draft and sends it as a test (Buttondown's send-draft endpoint), which goes to
+the account owner unless the optional BUTTONDOWN_TEST_TO secret names other addresses (comma-separated). No address
+is ever printed: the workflow logs of a public repository are public.
 """
 import argparse
 import datetime as dt
@@ -15,6 +20,7 @@ import os
 import re
 import subprocess
 import sys
+import urllib.error
 import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -62,10 +68,48 @@ def buttondown(subject, body, test, site):
         print(f"::warning::Buttondown failed: {e}")
 
 
+EMAIL_RE = re.compile(r"[^\s\"'<>@]+@[^\s\"'<>@]+")
+
+
+def _bd(method, path, key, payload=None):
+    req = urllib.request.Request("https://api.buttondown.com/v1" + path, method=method,
+                                 data=None if payload is None else json.dumps(payload).encode(),
+                                 headers={"Authorization": f"Token {key}", "Content-Type": "application/json",
+                                          "X-Buttondown-Live-Dangerously": "true"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            raw = r.read().decode("utf-8", "replace")
+            return r.status, (json.loads(raw) if raw.strip().startswith(("{", "[")) else {})
+    except urllib.error.HTTPError as e:
+        return e.code, {"error": EMAIL_RE.sub("<address>", e.read().decode("utf-8", "replace"))[:600]}
+
+
+def test_email(site):
+    """Create a draft and send it as a test to the newsletter owner (never to the subscriber list)."""
+    key = os.environ.get("BUTTONDOWN_API_KEY")
+    if not key:
+        sys.exit("BUTTONDOWN_API_KEY is not set")
+    subject = f"[Test] {site['site_name']} email alerts work"
+    body = body_text([{"title": f"Test email from {site['site_name']}", "detail": "If you can read this in your inbox, email alerts work."}], site, True)
+    st, draft = _bd("POST", "/emails", key, {"subject": subject, "body": body, "status": "draft"})
+    print("Buttondown draft:", st)
+    if st >= 300 or "id" not in draft:
+        sys.exit(f"could not create the draft: {draft.get('error', '')}")
+    to = [x.strip() for x in os.environ.get("BUTTONDOWN_TEST_TO", "").split(",") if x.strip()]
+    st, res = _bd("POST", f"/emails/{draft['id']}/send-draft", key, {"recipients": to} if to else {})
+    print("Buttondown send-draft:", st, "(to the account owner)" if not to else f"(to {len(to)} address(es) from BUTTONDOWN_TEST_TO)")
+    if st >= 300:
+        sys.exit(f"send-draft failed: {res.get('error', '')}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--test", action="store_true")
+    ap.add_argument("--test-email", action="store_true")
     a = ap.parse_args()
+    if a.test_email:
+        test_email(json.load(open(os.path.join(ROOT, "config", "site.json"), encoding="utf-8")))
+        return
     site = json.load(open(os.path.join(ROOT, "config", "site.json"), encoding="utf-8"))
     if a.test:
         events = [{"title": f"Test alert from {site['site_name']}", "detail": "If you can read this, alerts work."}]

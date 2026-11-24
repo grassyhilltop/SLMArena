@@ -9,6 +9,10 @@ on:
         description: "Also publish a test alert (a pre-release; Buttondown gets a draft only)"
         type: boolean
         default: false
+      test_email:
+        description: "Send a test email to the newsletter owner's inbox (not to subscribers)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -66,3 +70,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
         run: python scripts/send_alerts.py --test
+
+      - name: Test email
+        if: ${{ inputs.test_email }}
+        env:
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+          BUTTONDOWN_TEST_TO: ${{ secrets.BUTTONDOWN_TEST_TO }}
+        run: python scripts/send_alerts.py --test-email
