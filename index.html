@@ -609,7 +609,10 @@ footer h4 { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform
   var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   var GPU = [8, 12, 16, 24, 32];
   var DAY = 864e5;
-  var isPages = /github\.io$/.test(location.hostname) || location.protocol === "file:" || location.hostname === "localhost";
+  // The live site (slmarena.org, or the github.io address that forwards to it) hosts the sign-up form and real
+  // downloads; any other host is a snapshot, such as the copy shared on claude.ai.
+  var SITE_HOST = (function () { try { return new URL(SITE.site_url).hostname.replace(/^www\./, ""); } catch (e) { return ""; } })();
+  var isPages = location.hostname.replace(/^www\./, "") === SITE_HOST || /github\.io$/.test(location.hostname) || location.protocol === "file:" || location.hostname === "localhost";
   var REDUCED = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
   // ---------- helpers
