@@ -13,6 +13,10 @@ on:
         description: "Send a test email to the newsletter owner's inbox (not to subscribers)"
         type: boolean
         default: false
+      test_alert_live:
+        description: "Send a labelled test alert to the mailing list (refused if it has more than 3 confirmed subscribers)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -77,3 +81,9 @@ jobs:
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
           BUTTONDOWN_TEST_TO: ${{ secrets.BUTTONDOWN_TEST_TO }}
         run: python scripts/send_alerts.py --test-email
+
+      - name: Live test alert
+        if: ${{ inputs.test_alert_live }}
+        env:
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+        run: python scripts/send_alerts.py --test-live

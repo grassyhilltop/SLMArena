@@ -8,6 +8,7 @@ is true in config/site.json, the same text is also sent to the Buttondown mailin
     python3 scripts/send_alerts.py           # announce pending events, if any
     python3 scripts/send_alerts.py --test    # announce a clearly labelled test event
     python3 scripts/send_alerts.py --test-email   # email only: a test sent to the newsletter's own inbox
+    python3 scripts/send_alerts.py --test-live    # a labelled test sent to the list, only while it has <= 3 confirmed
 
 --test-email creates a Buttondown draft and sends it as a test (Buttondown's send-draft endpoint), which goes to
 the account owner unless the optional BUTTONDOWN_TEST_TO secret names other addresses (comma-separated). No address
@@ -104,11 +105,43 @@ def test_email(site):
         sys.exit(f"send-draft failed: {res.get('error', '')}")
 
 
+def test_live(site, max_list=3):
+    """Send a clearly labelled test through the real alert path (a normal send to the whole list), but only while the
+    list is tiny, so a test never reaches a real audience. Prints counts, never addresses."""
+    key = os.environ.get("BUTTONDOWN_API_KEY")
+    if not key:
+        sys.exit("BUTTONDOWN_API_KEY is not set")
+    st, subs = _bd("GET", "/subscribers", key)
+    if st >= 300:
+        sys.exit(f"could not read the subscriber list: {subs.get('error', '')}")
+    items = subs.get("results", [])
+    kinds = {}
+    for x in items:
+        k = x.get("type") or x.get("subscriber_type") or "unknown"
+        kinds[k] = kinds.get(k, 0) + 1
+    confirmed = kinds.get("regular", 0) if any(k != "unknown" for k in kinds) else len(items)
+    print("Buttondown subscribers:", subs.get("count", len(items)), "by type:", kinds)
+    if confirmed == 0:
+        sys.exit("No confirmed subscribers yet; nothing to send.")
+    if confirmed > max_list:
+        sys.exit(f"{confirmed} confirmed subscribers: not sending a test to a real audience. Use --test-email instead.")
+    subject = f"[Test] {site['site_name']} alert"
+    body = body_text([{"title": f"Test alert from {site['site_name']}", "detail": "Sent through the same path as real alerts. If you can read this in your inbox, alerts reach you."}], site, True)
+    st, res = _bd("POST", "/emails", key, {"subject": subject, "body": body, "status": "about_to_send"})
+    print("Buttondown send to list:", st, "status:", res.get("status", ""), res.get("error", ""))
+    if st >= 300:
+        sys.exit("send failed")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--test", action="store_true")
     ap.add_argument("--test-email", action="store_true")
+    ap.add_argument("--test-live", action="store_true")
     a = ap.parse_args()
+    if a.test_live:
+        test_live(json.load(open(os.path.join(ROOT, "config", "site.json"), encoding="utf-8")))
+        return
     if a.test_email:
         test_email(json.load(open(os.path.join(ROOT, "config", "site.json"), encoding="utf-8")))
         return
