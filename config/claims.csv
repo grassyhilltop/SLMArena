@@ -46,3 +46,19 @@ inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,
 inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Gemma 4 31B IT,GPQA diamond,GPQA Diamond,85.7
 inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Beam 1.0,Terminal Bench,Terminal-Bench 2.1,80.1
 inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Beam 1.0,GPQA diamond,GPQA Diamond,90.5
+dory,https://huggingface.co/nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16,target,Dory 1.0 4B,nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16,,Terminal Bench,Terminal-Bench 2.1,22.2
+dory,https://huggingface.co/nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16,target,Dory 1.0 4B,nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16,,GPQA diamond,GPQA Diamond,72.16
+dory,https://huggingface.co/nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16,reference,,,Qwen3.5-9B,Terminal Bench,Terminal-Bench 2.1,24
+dory,https://huggingface.co/nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16,reference,,,Qwen3.5-9B,GPQA diamond,GPQA Diamond,80.93
+dory,https://huggingface.co/nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16,reference,,,Gemma 4 26B A4B,Terminal Bench,Terminal-Bench 2.1,35
+dory,https://huggingface.co/nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16,reference,,,Gemma 4 26B A4B,GPQA diamond,GPQA Diamond,80.43
+dory,https://huggingface.co/nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16,reference,,,Qwen 3.6 35B-A3B,Terminal Bench,Terminal-Bench 2.1,43
+dory,https://huggingface.co/nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16,reference,,,Qwen 3.6 35B-A3B,GPQA diamond,GPQA Diamond,85.35
+sensenova_loop,https://thinkingmachines.ai/model-card/inkling-2-mini/,target,SenseNova-Loop-9B,sensenova/SenseNova-Loop-9B,,Terminal Bench,Terminal-Bench 2.1,59.6
+sensenova_loop,https://thinkingmachines.ai/model-card/inkling-2-mini/,target,SenseNova-Loop-9B,sensenova/SenseNova-Loop-9B,,GPQA diamond,GPQA Diamond,74.8
+sensenova_loop,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Qwen 3.8 27B,Terminal Bench,Terminal-Bench 2.1,73.0
+sensenova_loop,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Qwen 3.8 27B,GPQA diamond,GPQA Diamond,90.5
+sensenova_loop,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Gemma 4 31B IT,Terminal Bench,Terminal-Bench 2.1,43.4
+sensenova_loop,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Gemma 4 31B IT,GPQA diamond,GPQA Diamond,85.7
+sensenova_loop,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Beam 1.0,Terminal Bench,Terminal-Bench 2.1,80.1
+sensenova_loop,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Beam 1.0,GPQA diamond,GPQA Diamond,90.5
