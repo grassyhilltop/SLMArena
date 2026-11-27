@@ -1,7 +1,7 @@
 # SLMArena
 
 **A leaderboard and forecast of the most capable language models that run on one 32 GB GPU.**
-Live site: https://grassyhilltop.github.io/SLMArena/
+Live site: https://slmarena.org/ (also slm.tools, slmarena.cc and slm-arena.com)
 
 By Joel Sadler, University of Virginia, School of Data Science. The earlier name, tiny-LMArena, redirects here.
 

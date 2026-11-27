@@ -6,3 +6,4 @@ K2 Horizon MoVA 36B A4B,Institute of Foundation Models,United Arab Emirates,IFM/
 K2 Horizon 7B,Institute of Foundation Models,United Arab Emirates,IFM/K2-Horizon-7B,2026-09-03,7,,
 Muse Glimmer,Meta AI,United States of America,meta-models/Muse-Glimmer-30B,2026-08-10,30,,
 G9v3-39A5B,ai9stars,,ai9stars/G9v3-39A5B,2026-08-20,39,5,
+Inkling 2 Mini,Thinking Machines,United States of America,thinkingmachines/Inkling-2-Mini,2026-11-20,26.4,5.4,"Looped mixture of experts: 3.4B active, about 5.4B effective with three passes over the middle layers. Ships in NVFP4/MXFP8 (about 20 GB); Apache 2.0."

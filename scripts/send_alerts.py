@@ -97,7 +97,9 @@ def test_email(site):
         sys.exit(f"could not create the draft: {draft.get('error', '')}")
     to = [x.strip() for x in os.environ.get("BUTTONDOWN_TEST_TO", "").split(",") if x.strip()]
     st, res = _bd("POST", f"/emails/{draft['id']}/send-draft", key, {"recipients": to} if to else {})
-    print("Buttondown send-draft:", st, "(to the account owner)" if not to else f"(to {len(to)} address(es) from BUTTONDOWN_TEST_TO)")
+    print("Buttondown send-draft:", st, "(no recipients given: Buttondown's default)" if not to else f"(to {len(to)} address(es) from BUTTONDOWN_TEST_TO)")
+    # what Buttondown says it did, with any address masked (public logs)
+    print("Buttondown response:", EMAIL_RE.sub("<address>", json.dumps(res))[:800])
     if st >= 300:
         sys.exit(f"send-draft failed: {res.get('error', '')}")
 

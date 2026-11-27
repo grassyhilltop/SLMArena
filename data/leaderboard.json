@@ -1,6 +1,6 @@
 {
- "generated": "2026-11-26T20:10:45+00:00",
- "today": "2026-11-26",
+ "generated": "2026-11-27T02:31:07+00:00",
+ "today": "2026-11-27",
  "epoch_fetched": "2026-11-26",
  "rule": {
   "max_params_b": 48.0,
@@ -2395,7 +2395,7 @@
    "value": 153.04,
    "ref_model": "Gemini 3 Pro",
    "ref_date": "2025-11-18",
-   "as_of": "2025-11-26",
+   "as_of": "2025-11-27",
    "ref_params_b": null
   }
  ],
@@ -2821,7 +2821,7 @@
    "sxx": 14.480504770900598,
    "s": 3.8617661322638153,
    "t": 1.771,
-   "trend_today": 159.05,
+   "trend_today": 159.1,
    "best": {
     "id": "qwen3-8-27b",
     "name": "Qwen3.8-27B",
@@ -2861,7 +2861,7 @@
   "fit32|last24": {
    "def": "fit32",
    "window": "last24",
-   "start": "2024-11-26",
+   "start": "2024-11-27",
    "points": 8,
    "slope_per_year": 11.47,
    "r2": 0.939,
@@ -2872,7 +2872,7 @@
    "sxx": 2.644880706481125,
    "s": 1.9376834336261606,
    "t": 1.943,
-   "trend_today": 153.77,
+   "trend_today": 153.8,
    "best": {
     "id": "qwen3-8-27b",
     "name": "Qwen3.8-27B",
@@ -2923,7 +2923,7 @@
    "sxx": 16.55976494725082,
    "s": 3.8279151687906112,
    "t": 1.761,
-   "trend_today": 158.56,
+   "trend_today": 158.61,
    "best": {
     "id": "qwen3-8-27b",
     "name": "Qwen3.8-27B",
@@ -2963,7 +2963,7 @@
   "anthropic|last24": {
    "def": "anthropic",
    "window": "last24",
-   "start": "2024-11-26",
+   "start": "2024-11-27",
    "points": 8,
    "slope_per_year": 12.35,
    "r2": 0.904,
@@ -2974,7 +2974,7 @@
    "sxx": 2.480818122844923,
    "s": 2.5871197212695938,
    "t": 1.943,
-   "trend_today": 153.31,
+   "trend_today": 153.34,
    "best": {
     "id": "qwen3-8-27b",
     "name": "Qwen3.8-27B",
@@ -3611,7 +3611,7 @@
    "anthropic": 152.63
   },
   {
-   "date": "2026-11-26",
+   "date": "2026-11-27",
    "frontier": 173.4,
    "fit32": 152.63,
    "anthropic": 152.63
@@ -3720,6 +3720,106 @@
   ]
  },
  "watchlist": [
+  {
+   "name": "Inkling 2 Mini",
+   "org": "Thinking Machines",
+   "hf_repo": "thinkingmachines/Inkling-2-Mini",
+   "date": "2026-11-20",
+   "params_b": 26.4,
+   "active_b": 5.4,
+   "note": "Looped mixture of experts: 3.4B active, about 5.4B effective with three passes over the middle layers. Ships in NVFP4/MXFP8 (about 20 GB); Apache 2.0.",
+   "country": "United States of America",
+   "region": "US",
+   "aa_index": null,
+   "estimate": {
+    "name": "Inkling 2 Mini",
+    "hf_repo": "thinkingmachines/Inkling-2-Mini",
+    "eci": 149.17,
+    "sd": 2.82,
+    "lo": 144.54,
+    "hi": 153.8,
+    "benchmarks": [
+     {
+      "benchmark": "GPQA diamond",
+      "estimate": 147.2,
+      "sigma": 4.41,
+      "spread": 2.3,
+      "n": 3,
+      "rows": [
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "GPQA Diamond",
+        "claimed": 86.6,
+        "reference": "Qwen 3.8 27B",
+        "reference_claimed": 90.5,
+        "reference_eci": 152.63,
+        "estimate": 149.32
+       },
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "GPQA Diamond",
+        "claimed": 86.6,
+        "reference": "Gemma 4 31B IT",
+        "reference_claimed": 85.7,
+        "reference_eci": 144.12,
+        "estimate": 144.76
+       },
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "GPQA Diamond",
+        "claimed": 86.6,
+        "reference": "Beam 1.0",
+        "reference_claimed": 90.5,
+        "reference_eci": 150.84,
+        "estimate": 147.53
+       }
+      ]
+     },
+     {
+      "benchmark": "Terminal Bench",
+      "estimate": 150.53,
+      "sigma": 3.66,
+      "spread": 2.24,
+      "n": 3,
+      "rows": [
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "Terminal-Bench 2.1",
+        "claimed": 71.6,
+        "reference": "Qwen 3.8 27B",
+        "reference_claimed": 73.0,
+        "reference_eci": 152.63,
+        "estimate": 152.2
+       },
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "Terminal-Bench 2.1",
+        "claimed": 71.6,
+        "reference": "Gemma 4 31B IT",
+        "reference_claimed": 43.4,
+        "reference_eci": 144.12,
+        "estimate": 151.4
+       },
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "Terminal-Bench 2.1",
+        "claimed": 71.6,
+        "reference": "Beam 1.0",
+        "reference_claimed": 80.1,
+        "reference_eci": 150.84,
+        "estimate": 147.98
+       }
+      ]
+     }
+    ]
+   }
+  },
   {
    "name": "Nanbeige4.3-33B",
    "org": "Nanbeige",
@@ -4938,6 +5038,94 @@
         "reference_claimed": 29.2,
         "reference_eci": 139.5,
         "estimate": 143.59
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Inkling 2 Mini",
+    "hf_repo": "thinkingmachines/Inkling-2-Mini",
+    "eci": 149.17,
+    "sd": 2.82,
+    "lo": 144.54,
+    "hi": 153.8,
+    "benchmarks": [
+     {
+      "benchmark": "GPQA diamond",
+      "estimate": 147.2,
+      "sigma": 4.41,
+      "spread": 2.3,
+      "n": 3,
+      "rows": [
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "GPQA Diamond",
+        "claimed": 86.6,
+        "reference": "Qwen 3.8 27B",
+        "reference_claimed": 90.5,
+        "reference_eci": 152.63,
+        "estimate": 149.32
+       },
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "GPQA Diamond",
+        "claimed": 86.6,
+        "reference": "Gemma 4 31B IT",
+        "reference_claimed": 85.7,
+        "reference_eci": 144.12,
+        "estimate": 144.76
+       },
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "GPQA Diamond",
+        "claimed": 86.6,
+        "reference": "Beam 1.0",
+        "reference_claimed": 90.5,
+        "reference_eci": 150.84,
+        "estimate": 147.53
+       }
+      ]
+     },
+     {
+      "benchmark": "Terminal Bench",
+      "estimate": 150.53,
+      "sigma": 3.66,
+      "spread": 2.24,
+      "n": 3,
+      "rows": [
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "Terminal-Bench 2.1",
+        "claimed": 71.6,
+        "reference": "Qwen 3.8 27B",
+        "reference_claimed": 73.0,
+        "reference_eci": 152.63,
+        "estimate": 152.2
+       },
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "Terminal-Bench 2.1",
+        "claimed": 71.6,
+        "reference": "Gemma 4 31B IT",
+        "reference_claimed": 43.4,
+        "reference_eci": 144.12,
+        "estimate": 151.4
+       },
+       {
+        "table": "inkling2mini",
+        "source": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "claimed_benchmark": "Terminal-Bench 2.1",
+        "claimed": 71.6,
+        "reference": "Beam 1.0",
+        "reference_claimed": 80.1,
+        "reference_eci": 150.84,
+        "estimate": 147.98
        }
       ]
      }

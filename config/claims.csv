@@ -38,3 +38,11 @@ k2-mova,https://huggingface.co/IFM/K2-Horizon-MoVA-36B-A4B,reference,,,Qwen 3.6 
 k2-mova,https://huggingface.co/IFM/K2-Horizon-MoVA-36B-A4B,reference,,,Gemma 4 31B IT,GPQA diamond,GPQA Diamond,85.7
 k2-7b,https://huggingface.co/IFM/K2-Horizon-7B,target,K2 Horizon 7B,IFM/K2-Horizon-7B,,Terminal Bench,Terminal-Bench 2.1,44.6
 k2-7b,https://huggingface.co/IFM/K2-Horizon-7B,reference,,,Qwen3.5-9B,Terminal Bench,Terminal-Bench 2.1,29.2
+inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,target,Inkling 2 Mini,thinkingmachines/Inkling-2-Mini,,Terminal Bench,Terminal-Bench 2.1,71.6
+inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,target,Inkling 2 Mini,thinkingmachines/Inkling-2-Mini,,GPQA diamond,GPQA Diamond,86.6
+inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Qwen 3.8 27B,Terminal Bench,Terminal-Bench 2.1,73.0
+inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Qwen 3.8 27B,GPQA diamond,GPQA Diamond,90.5
+inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Gemma 4 31B IT,Terminal Bench,Terminal-Bench 2.1,43.4
+inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Gemma 4 31B IT,GPQA diamond,GPQA Diamond,85.7
+inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Beam 1.0,Terminal Bench,Terminal-Bench 2.1,80.1
+inkling2mini,https://thinkingmachines.ai/model-card/inkling-2-mini/,reference,,,Beam 1.0,GPQA diamond,GPQA Diamond,90.5
